@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "976271546780",
+    "firebase_url": "https://stylesnsmiles-64578.firebaseio.com",
+    "project_id": "stylesnsmiles-64578",
+    "storage_bucket": "stylesnsmiles-64578.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:976271546780:android:d05a7383887ac4df",
+        "android_client_info": {
+          "package_name": "com.example.abhishek.stylesnsmiles"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "976271546780-ucn1qgoqfo75bk8araha1d0cav7hb9o9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.abhishek.stylesnsmiles",
+            "certificate_hash": "c296ba460521597f2a6cc99d5a44b01b657f8bdf"
+          }
+        },
+        {
+          "client_id": "976271546780-4kq89t8s1v4bh8mmmk3haqd3a5n39kgi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2tRPwxSB51rPzUN9ho0A7SKSBqFWG7Lg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "976271546780-4kq89t8s1v4bh8mmmk3haqd3a5n39kgi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

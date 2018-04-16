@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/parlour11"
+    android:layout_height="match_parent"
+    tools:context=".Login">
+
+<TextView
+    android:padding="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Sign in\nwith all new Parlour application"
+    android:textColor="#000000"
+    android:textSize="20dp"
+    android:gravity="center"
+ />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="2">
+
+    <Button
+        android:id="@+id/btnmanager"
+android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="#606060"
+        android:layout_gravity="bottom"
+
+        android:textStyle="bold"
+        android:text="Parlour Manager"
+        android:textSize="15sp" />
+    <Button
+    android:id="@+id/btn_user"
+android:layout_weight="1"
+    android:layout_width="0dp"
+    android:layout_height="50dp"
+        android:background="#00802b"
+    android:layout_gravity="bottom"
+
+        android:textStyle="bold"
+
+        android:text="Customer"
+    android:textSize="15sp" />
+</LinearLayout>
+
+
+
+</LinearLayout>
