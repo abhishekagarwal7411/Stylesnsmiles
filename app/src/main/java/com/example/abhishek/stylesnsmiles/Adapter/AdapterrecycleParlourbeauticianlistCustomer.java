@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.abhishek.stylesnsmiles.BookingAppointment;
-import com.example.abhishek.stylesnsmiles.PojoParlourBeauticaian;
+import com.example.abhishek.stylesnsmiles.Activity.BookingAppointment;
+import com.example.abhishek.stylesnsmiles.PojoClass.PojoParlourBeauticaian;
 import com.example.abhishek.stylesnsmiles.R;
 
 import java.util.List;
@@ -19,25 +19,10 @@ import java.util.List;
 
 public class AdapterrecycleParlourbeauticianlistCustomer extends RecyclerView.Adapter<AdapterrecycleParlourbeauticianlistCustomer.MyViewHolder> {
 
-    private Context mContext;
     List<PojoParlourBeauticaian> albumList;
-String name,url;
-    String mob,email,status,title;
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, emailid,mobile;
-        private Button btnbook;
-//        public ImageView thumbnail, overflow;
-//LinearLayout llalbum;
-        public MyViewHolder(View view) {
-            super(view);
-            title = (TextView) view.findViewById(R.id.title);
-            emailid = (TextView) view.findViewById(R.id.email);
-            mobile = (TextView) view.findViewById(R.id.mob);
-            btnbook=view.findViewById(R.id.btnbook);
-//            overflow = (ImageView) view.findViewById(R.id.overflow);
-        }
-    }
-
+    String name, url;
+    String mob, email, status, title;
+    private Context mContext;
 
     public AdapterrecycleParlourbeauticianlistCustomer(Context mContext, List<PojoParlourBeauticaian> albumList) {
         this.mContext = mContext;
@@ -57,7 +42,7 @@ String name,url;
         holder.title.setText(album.getUsername());
         holder.mobile.setText(album.getMobilenumber());
         holder.emailid.setText(album.getEmailId());
-        holder.btnbook.setText(album.getStatus());
+        holder.btnbook.setText("BOOK");
 //        name = albumList.get(position).getName();
         // loading album cover using Glide library
 //
@@ -71,18 +56,15 @@ String name,url;
                 status = albumList.get(position).getStatus();
                 title = albumList.get(position).getUsername();
                 Bundle bundle = new Bundle();
-                String url = "http://www.google.com";
                 bundle.putString("name", name);
                 bundle.putString("mobile", mob);
                 bundle.putString("email", email);
                 bundle.putString("status", status);
                 bundle.putString("title", title);
-                holder.btnbook.setText("Booked");
 
-                holder.btnbook.setEnabled(false);
 //                Intent intt=new Intent(mContext, BookingAppointment.class);
 //                        startActivity(new Intent(mContext, BookingAppointment.class));
-                Intent intent= new Intent(mContext, BookingAppointment.class);
+                Intent intent = new Intent(mContext, BookingAppointment.class);
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }
@@ -96,5 +78,21 @@ String name,url;
     @Override
     public int getItemCount() {
         return albumList.size();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView title, emailid, mobile;
+        private Button btnbook;
+
+        //        public ImageView thumbnail, overflow;
+//LinearLayout llalbum;
+        public MyViewHolder(View view) {
+            super(view);
+            title = (TextView) view.findViewById(R.id.title);
+            emailid = (TextView) view.findViewById(R.id.email);
+            mobile = (TextView) view.findViewById(R.id.mob);
+            btnbook = view.findViewById(R.id.btnbook);
+//            overflow = (ImageView) view.findViewById(R.id.overflow);
+        }
     }
 }

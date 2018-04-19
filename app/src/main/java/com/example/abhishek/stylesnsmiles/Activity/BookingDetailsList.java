@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.abhishek.stylesnsmiles.Adapter.AdapterrecycleParlourbeauticianlist;
+import com.example.abhishek.stylesnsmiles.Adapter.AdapterrecycleParlourbeauticianlistCustomerBooking;
+import com.example.abhishek.stylesnsmiles.PojoClass.BookingDetails;
 import com.example.abhishek.stylesnsmiles.PojoClass.PojoParlourBeauticaian;
 import com.example.abhishek.stylesnsmiles.R;
 import com.google.firebase.database.ChildEventListener;
@@ -23,32 +25,32 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewBeaticianList extends AppCompatActivity {
+public class BookingDetailsList extends AppCompatActivity {
     String title;
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
     TextView tv, nodatatext;
     RecyclerView rv;
-    AdapterrecycleParlourbeauticianlist adapter;
-    PojoParlourBeauticaian pojoParlourBeauticaian;
-    List<PojoParlourBeauticaian> pojoParlourBeauticaians = new ArrayList<>();
+    AdapterrecycleParlourbeauticianlistCustomerBooking adapter;
+    BookingDetails pojoParlourBeauticaian;
+    List<BookingDetails> pojoParlourBeauticaians = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_beatician_list);
-        tv = findViewById(R.id.txt_view_title);
-        rv = findViewById(R.id.recycler_view_beautician);
+        setContentView(R.layout.activity_booking_beatician_list);
+        tv = findViewById(R.id.txt_book_title);
+        rv = findViewById(R.id.recycler_book_beautician);
         nodatatext = findViewById(R.id.visibilitytext);
         Intent intent = getIntent();
         title = intent.getStringExtra("parlourtitle");
-        tv.setText("BEAUTICIAN LIST");
+        tv.setText("BOOKING LIST");
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(title);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference(title);
+        databaseReference = firebaseDatabase.getReference(title+"Booking");
 
         readDB();
 
@@ -76,7 +78,7 @@ public class ViewBeaticianList extends AppCompatActivity {
     }
 
     public void validate() {
-        adapter = new AdapterrecycleParlourbeauticianlist(this, pojoParlourBeauticaians);
+        adapter = new AdapterrecycleParlourbeauticianlistCustomerBooking(this, pojoParlourBeauticaians);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         rv.setLayoutManager(mLayoutManager);
         rv.setItemAnimator(new DefaultItemAnimator());
@@ -101,9 +103,8 @@ public class ViewBeaticianList extends AppCompatActivity {
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                pojoParlourBeauticaian = dataSnapshot.getValue(PojoParlourBeauticaian.class);
+                pojoParlourBeauticaian = dataSnapshot.getValue(BookingDetails.class);
                 pojoParlourBeauticaians.add(pojoParlourBeauticaian);
-                Log.e("albumLiost", Integer.toString(pojoParlourBeauticaians.size()));
 
                 validate();
 

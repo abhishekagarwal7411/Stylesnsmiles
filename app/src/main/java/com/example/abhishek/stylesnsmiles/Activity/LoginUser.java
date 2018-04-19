@@ -1,8 +1,10 @@
-package com.example.abhishek.stylesnsmiles;
+package com.example.abhishek.stylesnsmiles.Activity;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -10,52 +12,85 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.analytics.FirebaseAnalytics;
+import com.example.abhishek.stylesnsmiles.ClientConstant;
+import com.example.abhishek.stylesnsmiles.PojoClass.RegistrationPojo;
+import com.example.abhishek.stylesnsmiles.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoginUser extends AppCompatActivity {
-TextView txt;
-Button btn_login;
-EditText editName,etPassword;
-String userName,password,isparlour;
-RegistrationPojo registrationPojo;
+import static com.example.abhishek.stylesnsmiles.ClientConstant.DEFAULT_PREFERENCE;
+
+public class LoginUser extends AppCompatActivity implements ClientConstant{
+    TextView txt,loginheading;
+    Button btn_login;
+    EditText editName, etPassword;
+    String userName, password, isparlour;
+    RegistrationPojo registrationPojo;
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
-    List<RegistrationPojo> registrationPojos=new ArrayList<>();
+    Boolean isfromParlour=false;
+    List<RegistrationPojo> registrationPojos = new ArrayList<>();
+    SharedPreferences defaultPreferences;
+    SharedPreferences.Editor editPreferences;
+    String mobileno;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_user);
+        defaultPreferences = getSharedPreferences(DEFAULT_PREFERENCE, Context.MODE_PRIVATE);
+        editPreferences = defaultPreferences.edit();
         Intent intent = getIntent();
         isparlour = intent.getStringExtra("isparlourpage");
-        firebaseDatabase= FirebaseDatabase.getInstance();
-
-        databaseReference =  firebaseDatabase.getReference("registered");
-
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        if(isparlour.equals("isfromParlour")){
+            isfromParlour=true;
+        }
+        else{
+            isfromParlour=false;
+        }
+if(isfromParlour){
+    databaseReference = firebaseDatabase.getReference("parlourregistered");
+}else {
+    databaseReference = firebaseDatabase.getReference("registered");
+}
         viewInitializer();
         onClickListener();
     }
-   public void viewInitializer(){
-       txt=findViewById(R.id.new_registration);
-       btn_login=findViewById(R.id.btn_login);
-       editName=findViewById(R.id.et_username);
-       etPassword=findViewById(R.id.et_password);
-   }
-    public void onClickListener(){
+
+    public void viewInitializer() {
+        loginheading=findViewById(R.id.loginheading);
+        txt = findViewById(R.id.new_registration);
+        btn_login = findViewById(R.id.btn_login);
+        editName = findViewById(R.id.et_username);
+        etPassword = findViewById(R.id.et_password);
+        if(isfromParlour){
+            loginheading.setText("Parlour Login") ;
+        }
+        else{
+            loginheading.setText("Customer Login") ;
+
+        }
+    }
+
+    public void onClickListener() {
         txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent inent= new Intent(getApplicationContext(),Registeration.class);
+                Intent inent = new Intent(getApplicationContext(), Registeration.class);
+                if(isfromParlour){
+                    inent.putExtra("isparlour","isFromParlour")  ;
+                }else{
+                    inent.putExtra("isparlour","isnotFromParlour")  ;
+
+                }
                 startActivity(inent);
-finish();
+
             }
         });
         btn_login.setOnClickListener(new View.OnClickListener() {
@@ -81,25 +116,42 @@ finish();
 
     public void validate() {
         for (int i = 0; i < registrationPojos.size(); i++) {
-            Log.e("user",userName);
-            Log.e("nameee",registrationPojos.get(i).getUsername());
-            if(userName.equalsIgnoreCase(registrationPojos.get(i).getUsername())) {
+            Log.e("user", userName);
+            Log.e("nameee", registrationPojos.get(i).getUsername());
+            if (userName.equalsIgnoreCase(registrationPojos.get(i).getUsername())) {
+
 
                 if (password.equalsIgnoreCase(registrationPojos.get(i).getConfirmpassword())) {
+                    mobileno=  registrationPojos.get(i).getMobilenumber();
 //                    pd.dismiss();
 //                    Toast.makeText(LoginUser.this, "Login Successfull", Toast.LENGTH_SHORT).show();
-                    Intent inent= new Intent(getApplicationContext(),Home.class);
+
+                    Intent inent;
+                    if(isfromParlour){
+                        inent = new Intent(getApplicationContext(), ParlourPage.class);
+
+                    }
+                    else{
+
+
+
+                        editPreferences.putString(ClientConstant.KEY_MOBILE_NUM,mobileno);
+
+                        editPreferences.putString(ClientConstant.KEY_USERNAME,userName);
+                        Log.e("username",userName);
+editPreferences.apply();
+                        inent = new Intent(getApplicationContext(), Home.class);
+
+                    }
                     startActivity(inent);
                     finish();
 //                    if(memberList.get(i).getRo().equalsIgnoreCase("trainer"))
 
 
                 } else {
-//                    pd.dismiss();
-
-//                    Toast.makeText(LoginUser.this, "please check your usename or password", Toast.LENGTH_SHORT).show();
+//
                 }
-            }else{
+            } else {
 //                Toast.makeText(LoginUser.this, "Please enter valid username", Toast.LENGTH_SHORT).show();
             }
         }
@@ -107,6 +159,7 @@ finish();
 //        pd.dismiss();
 //        Toast.makeText(Login.this, "User Not found", Toast.LENGTH_SHORT).show();
     }
+
     public void readDB()
 
     {

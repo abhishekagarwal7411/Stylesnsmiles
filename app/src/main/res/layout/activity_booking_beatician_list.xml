@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#d3d3d3"
-    tools:context=".Activity.ParlourPage">
+  >
     <TextView
-        android:id="@+id/txt_view_title"
+        android:id="@+id/txt_book_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
@@ -26,9 +26,9 @@
         android:visibility="gone"
         android:text="No Beautician added yet"/>
     <android.support.v7.widget.RecyclerView
-        android:layout_below="@+id/txt_view_title"
+        android:layout_below="@+id/txt_book_title"
         android:padding="5dp"
-        android:id="@+id/recycler_view_beautician"
+        android:id="@+id/recycler_book_beautician"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

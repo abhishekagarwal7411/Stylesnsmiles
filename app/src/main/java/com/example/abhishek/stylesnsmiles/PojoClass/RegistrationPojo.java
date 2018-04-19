@@ -1,17 +1,19 @@
-package com.example.abhishek.stylesnsmiles;
+package com.example.abhishek.stylesnsmiles.PojoClass;
 
 public class RegistrationPojo {
-private String username;
-  private   String mobilenumber;
-   private String emailId;
-   private String confirmpassword;
-   public RegistrationPojo(){
+    private String username;
+    private String mobilenumber;
+    private String emailId;
+    private String confirmpassword;
 
-   }
-    public RegistrationPojo(String username, String mobilenumber, String emailId,String confirmpassword) {
+    public RegistrationPojo() {
+
+    }
+
+    public RegistrationPojo(String username, String mobilenumber, String emailId, String confirmpassword) {
         this.username = username;
         this.mobilenumber = mobilenumber;
-this.confirmpassword=confirmpassword;
+        this.confirmpassword = confirmpassword;
         this.emailId = emailId;
 
     }

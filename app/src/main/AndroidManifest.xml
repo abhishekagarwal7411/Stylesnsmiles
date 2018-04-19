@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Splashscreen"
+            android:name=".Activity.Splashscreen"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,20 +18,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Home" />
+        <activity android:name=".Activity.Home" />
         <activity
-            android:name=".Login"
+            android:name=".Activity.Login"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".LoginUser"
+            android:name=".Activity.LoginUser"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".Registeration" />
-        <activity android:name=".ParlourPage" />
-        <activity android:name=".ParlourRegister" />
-        <activity android:name=".ParlourDetails" />
-        <activity android:name=".ViewBeaticianList" />
-        <activity android:name=".BookingAppointment" />
-        <activity android:name=".ChatScreen"></activity>
+        <activity android:name=".Activity.Registeration" />
+        <activity android:name=".Activity.ParlourPage" />
+        <activity android:name=".Activity.ParlourRegister" />
+        <activity android:name=".Activity.ParlourDetails" />
+        <activity android:name=".Activity.ViewBeaticianList" />
+        <activity android:name=".Activity.BookingAppointment" />
+        <activity android:name=".Activity.BookingDetailsList" />
+        <activity android:name=".Activity.ChatScreen" />
+        <activity android:name=".Activity.About"></activity>
     </application>
 
 </manifest>

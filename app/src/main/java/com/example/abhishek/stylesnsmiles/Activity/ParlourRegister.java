@@ -1,9 +1,9 @@
-package com.example.abhishek.stylesnsmiles;
+package com.example.abhishek.stylesnsmiles.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +17,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.abhishek.stylesnsmiles.PojoClass.PojoParlourBeauticaian;
+import com.example.abhishek.stylesnsmiles.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
@@ -28,14 +30,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ParlourRegister extends AppCompatActivity {
-String  title;
+    String title;
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
-    EditText etname,etemail,etmob;
-    Button addbeauty,viewbeauty;
+    EditText etname, etemail, etmob;
+    Button addbeauty, viewbeauty,btn_Details;
     String MobilePattern = "[0-9]{10}";
-    String username,contactNumber,emailId;
-    String status="Book";
+    String username, contactNumber, emailId;
+    String status = "Book";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,15 +51,17 @@ String  title;
         }
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference(title);
-        etname=findViewById(R.id.user_name_parlour);
-        etemail=findViewById(R.id.etemail_parlour);
-        etmob=findViewById(R.id.mobile_num_parlour);
-        addbeauty=findViewById(R.id.btn_add_beautician);
-        viewbeauty=findViewById(R.id.btn_viewall);
+        etname = findViewById(R.id.user_name_parlour);
+        etemail = findViewById(R.id.etemail_parlour);
+        etmob = findViewById(R.id.mobile_num_parlour);
+        addbeauty = findViewById(R.id.btn_add_beautician);
+        viewbeauty = findViewById(R.id.btn_viewall);
+        btn_Details=findViewById(R.id.btn_Details);
         clickListener();
     }
+
     @Override
-    public boolean onOptionsItemSelected (MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -66,12 +71,21 @@ String  title;
 
         return super.onOptionsItemSelected(item);
     }
-    public void clickListener(){
+
+    public void clickListener() {
+        btn_Details.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ParlourRegister.this, BookingDetailsList.class);
+                intent.putExtra("parlourtitle", title);
+                startActivity(intent);
+            }
+        });
         viewbeauty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(ParlourRegister.this,ViewBeaticianList.class);
-                intent.putExtra("parlourtitle",title);
+                Intent intent = new Intent(ParlourRegister.this, ViewBeaticianList.class);
+                intent.putExtra("parlourtitle", title);
                 startActivity(intent);
             }
         });
@@ -100,6 +114,7 @@ String  title;
             }
         });
     }
+
     public void checkDB() {
 
         if (databaseReference != null) {
@@ -124,7 +139,7 @@ String  title;
 
     public void writeData() {
         Log.e("writeData", "writeData");
-        PojoParlourBeauticaian user = new PojoParlourBeauticaian(username, contactNumber, emailId,title,status);
+        PojoParlourBeauticaian user = new PojoParlourBeauticaian(username, contactNumber, emailId, title, status);
         databaseReference.child(username).setValue(user);
         Toast.makeText(ParlourRegister.this, "Beautician Added Successfully", Toast.LENGTH_SHORT).show();
 //        startActivity(new Intent(ParlourRegister.this, ParlourPage.class));

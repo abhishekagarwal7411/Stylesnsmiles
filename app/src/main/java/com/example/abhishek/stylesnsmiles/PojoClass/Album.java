@@ -1,4 +1,4 @@
-package com.example.abhishek.stylesnsmiles;
+package com.example.abhishek.stylesnsmiles.PojoClass;
 
 /**
  * Created by Lincoln on 18/05/16.
@@ -7,8 +7,17 @@ public class Album {
     private String name;
     private int numOfSongs;
     private int thumbnail;
-private String city;
+    private String city;
+
     public Album() {
+    }
+
+    public Album(String name, int numOfSongs, int thumbnail, String city) {
+        this.name = name;
+        this.numOfSongs = numOfSongs;
+
+        this.thumbnail = thumbnail;
+        this.city = city;
     }
 
     public String getCity() {
@@ -17,14 +26,6 @@ private String city;
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public Album(String name, int numOfSongs, int thumbnail, String city) {
-        this.name = name;
-        this.numOfSongs = numOfSongs;
-
-        this.thumbnail = thumbnail;
-        this.city=city;
     }
 
     public String getName() {

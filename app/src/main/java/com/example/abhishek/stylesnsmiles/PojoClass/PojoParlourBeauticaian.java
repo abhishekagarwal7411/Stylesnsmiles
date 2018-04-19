@@ -1,22 +1,23 @@
-package com.example.abhishek.stylesnsmiles;
+package com.example.abhishek.stylesnsmiles.PojoClass;
 
 public class PojoParlourBeauticaian {
     private String username;
     private String mobilenumber;
     private String emailId;
     private String confirmpassword;
-private String title;
-private String status;
+    private String title;
+    private String status;
+
     public PojoParlourBeauticaian() {
 
     }
 
-    public PojoParlourBeauticaian(String username, String mobilenumber, String emailId,String title, String status) {
+    public PojoParlourBeauticaian(String username, String mobilenumber, String emailId, String title, String status) {
         this.username = username;
         this.mobilenumber = mobilenumber;
         this.emailId = emailId;
-        this.status=status;
-this.title=title;
+        this.status = status;
+        this.title = title;
     }
 
     public String getStatus() {

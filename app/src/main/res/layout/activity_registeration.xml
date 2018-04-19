@@ -30,7 +30,7 @@ android:background="@drawable/loginuser"
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                   android:id="@+id/registerText" android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:paddingBottom="10dp"

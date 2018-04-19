@@ -1,11 +1,13 @@
-package com.example.abhishek.stylesnsmiles;
+package com.example.abhishek.stylesnsmiles.PojoClass;
 
 public class DrawerItem {
     private String name;
 
     private int thumbnail;
+
     public DrawerItem() {
     }
+
     public DrawerItem(String name, int thumbnail) {
         this.name = name;
 
@@ -14,6 +16,7 @@ public class DrawerItem {
 
 
     }
+
     public String getName() {
         return name;
     }

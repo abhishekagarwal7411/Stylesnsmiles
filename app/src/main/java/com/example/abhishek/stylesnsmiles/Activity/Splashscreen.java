@@ -1,9 +1,11 @@
-package com.example.abhishek.stylesnsmiles;
+package com.example.abhishek.stylesnsmiles.Activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+
+import com.example.abhishek.stylesnsmiles.R;
 
 public class Splashscreen extends AppCompatActivity {
 
@@ -24,7 +26,7 @@ public class Splashscreen extends AppCompatActivity {
                 // Start your app main activity
 
 
-                Intent intent= new Intent(Splashscreen.this,Login.class);
+                Intent intent = new Intent(Splashscreen.this, Login.class);
                 startActivity(intent);
                 finish();
 

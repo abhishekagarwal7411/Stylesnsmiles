@@ -1,20 +1,19 @@
-package com.example.abhishek.stylesnsmiles;
+package com.example.abhishek.stylesnsmiles.Activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.example.abhishek.stylesnsmiles.Adapter.AdapterrecycleParlourbeauticianlist;
 import com.example.abhishek.stylesnsmiles.Adapter.AdapterrecycleParlourbeauticianlistCustomer;
+import com.example.abhishek.stylesnsmiles.PojoClass.PojoParlourBeauticaian;
+import com.example.abhishek.stylesnsmiles.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,16 +24,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParlourDetails extends AppCompatActivity {
-String title,images;
-//        int images;
-TextView tst;
-ImageView img;
+    String title, images;
+    //        int images;
+    TextView tst;
+    ImageView img;
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
     RecyclerView rv;
     AdapterrecycleParlourbeauticianlistCustomer adapter;
     PojoParlourBeauticaian pojoParlourBeauticaian;
-    List<PojoParlourBeauticaian> pojoParlourBeauticaians=new ArrayList<>();
+    List<PojoParlourBeauticaian> pojoParlourBeauticaians = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +42,8 @@ ImageView img;
         Intent intent = getIntent();
         title = intent.getStringExtra("parlournameCustomer");
 //        tst=(TextView)findViewById(R.id.tst);
-        img=(ImageView)findViewById(R.id.img);
-        rv=findViewById(R.id.recycler_view_beautician_cust);
+        img = (ImageView) findViewById(R.id.img);
+        rv = findViewById(R.id.recycler_view_beautician_cust);
 
 //        tst.setText(title);
 
@@ -56,8 +56,9 @@ ImageView img;
 
         readDB();
     }
+
     @Override
-    public boolean onOptionsItemSelected (MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -67,8 +68,9 @@ ImageView img;
 
         return super.onOptionsItemSelected(item);
     }
-    public void validate(){
-        adapter = new AdapterrecycleParlourbeauticianlistCustomer(this,pojoParlourBeauticaians);
+
+    public void validate() {
+        adapter = new AdapterrecycleParlourbeauticianlistCustomer(this, pojoParlourBeauticaians);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         rv.setLayoutManager(mLayoutManager);
         rv.setItemAnimator(new DefaultItemAnimator());
@@ -76,15 +78,16 @@ ImageView img;
 
 
     }
+
     public void readDB()
 
     {
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                pojoParlourBeauticaian = dataSnapshot.getValue                      (PojoParlourBeauticaian.class);
+                pojoParlourBeauticaian = dataSnapshot.getValue(PojoParlourBeauticaian.class);
                 pojoParlourBeauticaians.add(pojoParlourBeauticaian);
-                Log.e("albumLiost",Integer.toString(pojoParlourBeauticaians.size()));
+                Log.e("albumLiost", Integer.toString(pojoParlourBeauticaians.size()));
 //                if(pojoParlourBeauticaians.size() == 0){
 //                    nodatatext.setVisibility(View.VISIBLE);
 //

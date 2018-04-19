@@ -140,6 +140,13 @@
                 android:layout_marginTop="20dp"
                 android:textSize="17sp"
                 android:text="view Beautician" />
+            <Button
+                android:id="@+id/btn_Details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="17sp"
+                android:text="Booking Details" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

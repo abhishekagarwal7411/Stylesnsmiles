@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".About">
+    tools:context=".Activity.About">
+    <ImageView
+        android:id="@+id/image_about"
+        android:src="@drawable/parloursplash"
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+    <TextView
+        android:layout_below="@+id/image_about"
+        android:id="@+id/text_big"
+        android:textColor="#000000"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:text="A beauty salon or beauty parlor (beauty parlour), or sometimes beauty shop, is an establishment dealing with cosmetic treatments for men and women.Other variations of this type of business include hair salons and spas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+<TextView
+    android:padding="6dp"
+    android:textStyle="bold"
+    android:textColor="#000000"
+    android:gravity="center"
+    android:layout_below="@+id/text_big"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="With this appllication now user can easily book appointment sitting at home."/>
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

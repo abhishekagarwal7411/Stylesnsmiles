@@ -1,4 +1,4 @@
-package com.example.abhishek.stylesnsmiles;
+package com.example.abhishek.stylesnsmiles.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -17,6 +18,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.abhishek.stylesnsmiles.PojoClass.RegistrationPojo;
+import com.example.abhishek.stylesnsmiles.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
@@ -32,8 +35,12 @@ public class Registeration extends AppCompatActivity {
     String username, contactNumber, password, confirmpassword, emailId;
     String MobilePattern = "[0-9]{10}";
     Button regiter;
+    TextView registerText;
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
+    String isparlour;
+    Boolean isfromParlour = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,15 +49,28 @@ public class Registeration extends AppCompatActivity {
             getSupportActionBar().setTitle("Register Now");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
+        Intent intent = getIntent();
+        isparlour = intent.getStringExtra("isparlour");
+        if (isparlour.equals("isFromParlour")) {
+            isfromParlour = true;
+        }
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("registered");
+
         etusername = findViewById(R.id.user_name);
         etmobile = findViewById(R.id.mobile_num);
         regiter = findViewById(R.id.btn_register);
         etemail = findViewById(R.id.et_email_Id);
         etpassword = findViewById(R.id.et_password);
         etconpassword = findViewById(R.id.confirm_password);
+        registerText=findViewById(R.id.registerText);
+        if (isfromParlour) {
+            databaseReference = firebaseDatabase.getReference("parlourregistered");
+            registerText.setText("Parlour Registration");
+        } else {
+            databaseReference = firebaseDatabase.getReference("registered");
+            registerText.setText("Customer Registration");
+
+        }
         clicklistener();
     }
 

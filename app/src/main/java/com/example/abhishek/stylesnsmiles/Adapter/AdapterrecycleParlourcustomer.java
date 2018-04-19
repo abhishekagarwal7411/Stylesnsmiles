@@ -11,9 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.abhishek.stylesnsmiles.Album;
-import com.example.abhishek.stylesnsmiles.ParlourDetails;
-import com.example.abhishek.stylesnsmiles.ParlourRegister;
+import com.example.abhishek.stylesnsmiles.Activity.ParlourDetails;
+import com.example.abhishek.stylesnsmiles.PojoClass.Album;
 import com.example.abhishek.stylesnsmiles.R;
 
 import java.util.List;
@@ -23,26 +22,10 @@ import java.util.List;
  */
 public class AdapterrecycleParlourcustomer extends RecyclerView.Adapter<AdapterrecycleParlourcustomer.MyViewHolder> {
 
+    String name, url;
+    int thumbnails;
     private Context mContext;
     private List<Album> albumList;
-String name,url;
-    int thumbnails;
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, count;
-        public ImageView thumbnail, overflow;
-LinearLayout llalbum;
-
-        public MyViewHolder(View view) {
-            super(view);
-            title = (TextView) view.findViewById(R.id.title);
-            count = (TextView) view.findViewById(R.id.count);
-            thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
-            llalbum=(LinearLayout)view.findViewById(R.id.parlouralbum);
-
-//            overflow = (ImageView) view.findViewById(R.id.overflow);
-        }
-    }
-
 
     public AdapterrecycleParlourcustomer(Context mContext, List<Album> albumList) {
         this.mContext = mContext;
@@ -73,7 +56,7 @@ LinearLayout llalbum;
                 Intent centerLocationDetails = new Intent(mContext, ParlourDetails.class);
 
                 centerLocationDetails.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                centerLocationDetails.putExtra("parlournameCustomer",name);
+                centerLocationDetails.putExtra("parlournameCustomer", name);
 //                centerLocationDetails.putExtra("image",thumbnails);
 
                 mContext.startActivity(centerLocationDetails);
@@ -88,5 +71,21 @@ LinearLayout llalbum;
     @Override
     public int getItemCount() {
         return albumList.size();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView title, count;
+        public ImageView thumbnail, overflow;
+        LinearLayout llalbum;
+
+        public MyViewHolder(View view) {
+            super(view);
+            title = (TextView) view.findViewById(R.id.title);
+            count = (TextView) view.findViewById(R.id.count);
+            thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
+            llalbum = (LinearLayout) view.findViewById(R.id.parlouralbum);
+
+//            overflow = (ImageView) view.findViewById(R.id.overflow);
+        }
     }
 }

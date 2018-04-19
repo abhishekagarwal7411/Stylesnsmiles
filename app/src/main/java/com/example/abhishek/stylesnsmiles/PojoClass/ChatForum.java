@@ -1,16 +1,16 @@
-package com.example.abhishek.stylesnsmiles.Adapter;
+package com.example.abhishek.stylesnsmiles.PojoClass;
 
 import java.util.Date;
 
 public class ChatForum {
     private String messageText;
     private String messageUser;
-    private  long messageTime;
+    private long messageTime;
 
     public ChatForum(String messageText, String messageUser) {
         this.messageText = messageText;
         this.messageUser = messageUser;
-        messageTime=new Date().getTime();
+        messageTime = new Date().getTime();
     }
 
     public ChatForum() {
