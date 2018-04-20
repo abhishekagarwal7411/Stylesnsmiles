@@ -1,5 +1,7 @@
 package com.example.abhishek.stylesnsmiles.Activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,10 +12,12 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.abhishek.stylesnsmiles.Adapter.AdapterrecycleParlourbeauticianlist;
 import com.example.abhishek.stylesnsmiles.Adapter.AdapterrecycleParlourbeauticianlistCustomerBooking;
 import com.example.abhishek.stylesnsmiles.PojoClass.BookingDetails;
+import com.example.abhishek.stylesnsmiles.PojoClass.Connectivity;
 import com.example.abhishek.stylesnsmiles.PojoClass.PojoParlourBeauticaian;
 import com.example.abhishek.stylesnsmiles.R;
 import com.google.firebase.database.ChildEventListener;
@@ -39,20 +43,21 @@ public class BookingDetailsList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_beatician_list);
-        tv = findViewById(R.id.txt_book_title);
-        rv = findViewById(R.id.recycler_book_beautician);
-        nodatatext = findViewById(R.id.visibilitytext);
-        Intent intent = getIntent();
-        title = intent.getStringExtra("parlourtitle");
-        tv.setText("BOOKING LIST");
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(title);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference(title+"Booking");
+        if (Connectivity.isNetworkAvailable(BookingDetailsList.this)) {
+            tv = findViewById(R.id.txt_book_title);
+            rv = findViewById(R.id.recycler_book_beautician);
+            nodatatext = findViewById(R.id.visibilitytext);
+            Intent intent = getIntent();
+            title = intent.getStringExtra("parlourtitle");
+            tv.setText("BOOKING LIST");
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setTitle(title);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+            firebaseDatabase = FirebaseDatabase.getInstance();
+            databaseReference = firebaseDatabase.getReference(title + "Booking");
 
-        readDB();
+            readDB();
 
 //        new Handler().postDelayed(new Runnable() {
 //
@@ -75,6 +80,26 @@ public class BookingDetailsList extends AppCompatActivity {
 
 
 //        Toast.makeText(ViewBeaticianList.this,title, Toast.LENGTH_SHORT).show();
+        }else{
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(BookingDetailsList.this);
+            alertDialogBuilder.setTitle("Internet connection");
+            alertDialogBuilder.setMessage("Please check your internet connection"
+            );
+            alertDialogBuilder.setPositiveButton("OK",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface arg0, int arg1) {
+
+
+
+
+                        }
+                    });
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+
+        }
     }
 
     public void validate() {

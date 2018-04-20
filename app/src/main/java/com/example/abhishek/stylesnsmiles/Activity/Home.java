@@ -96,17 +96,18 @@ public class Home extends AppCompatActivity implements ClientConstant {
                                     Intent intent = new Intent(Home.this, Login.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 
-                                    finish();
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);
+                                    finish();
+
                                 }
                             });
 
                     alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                          
+
                         }
                     });
 
@@ -158,10 +159,10 @@ public class Home extends AppCompatActivity implements ClientConstant {
                 R.drawable.parlour9,
                 R.drawable.parlour10,
                 R.drawable.parlour11};
-        Album a = new Album("Arabella Hair & Beauty", 13, covers[0], "Kormangala");
+        Album a = new Album("Arabella Hair and Beauty", 13, covers[0], "Kormangala");
         albumList.add(a);
 
-        a = new Album("Sparkliez Beauty & Nails", 8, covers[1], "Btm");
+        a = new Album("Sparkliez Beauty and Nails", 8, covers[1], "Btm");
         albumList.add(a);
 
         a = new Album("Rebecca Salon", 11, covers[2], "Kengeri");
@@ -173,7 +174,7 @@ public class Home extends AppCompatActivity implements ClientConstant {
         a = new Album("Armonika", 14, covers[4], "Yeswanthpur");
         albumList.add(a);
 
-        a = new Album("Toni & Guy", 1, covers[5], "Shivajinagar");
+        a = new Album("Toni and Guy", 1, covers[5], "Shivajinagar");
         albumList.add(a);
 
         a = new Album("Aquayo", 11, covers[6], "MG Road");

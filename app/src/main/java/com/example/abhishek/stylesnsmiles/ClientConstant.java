@@ -9,6 +9,8 @@ public interface ClientConstant {
     String DEFAULT_PREFERENCE = "defaultPreferences";
     String KEY_FULL_NAME = "firstName";
     String KEY_MOBILE_NUM = "contactNumber";
+    String KEY_BEAUTY_NAME="Beautyname";
+    String KEY_ORGANIZATION="organization";
     String KEY_CONTACT_ID = "contactDetailsId";
     String KEY_EMAIL_ID = "email";
     String KEY_ADDR_1 = "address1";

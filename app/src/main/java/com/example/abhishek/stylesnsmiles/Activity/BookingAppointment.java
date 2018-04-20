@@ -35,6 +35,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.abhishek.stylesnsmiles.ClientConstant;
 import com.example.abhishek.stylesnsmiles.PojoClass.BookingDetails;
+import com.example.abhishek.stylesnsmiles.PojoClass.Connectivity;
 import com.example.abhishek.stylesnsmiles.PojoClass.RegistrationPojo;
 import com.example.abhishek.stylesnsmiles.R;
 import com.google.firebase.database.DatabaseReference;
@@ -192,19 +193,22 @@ public class BookingAppointment extends AppCompatActivity implements
     }
 
     public void sendBookingData() {
-
+        if (Connectivity.isNetworkAvailable(BookingAppointment.this)) {
             date = txtDate.getText().toString();
             time = txtTime.getText().toString();
             if(date.isEmpty()){
                 Toast.makeText(BookingAppointment.this, "Please enter Booking Date", Toast.LENGTH_SHORT).show();
             }else if(time.isEmpty()) {
                 Toast.makeText(BookingAppointment.this, "Please enter Booking Time", Toast.LENGTH_SHORT).show();
-            }else{
+            }else {
 
-            checkDB();
+                checkDB();
+            }
 
 //            Bundle bundle = new Bundle();
 
+        } else{
+            Toast.makeText(BookingAppointment.this, "Please check your internet connection", Toast.LENGTH_SHORT).show();
         }
 
 //       bundle.putString("name", date);
@@ -236,7 +240,7 @@ public class BookingAppointment extends AppCompatActivity implements
     public void writeData() {
         Log.e("writeData", "writeData");
         BookingDetails user = new BookingDetails(username,customermobile, parlourname, name, parlourmobile, date, time);
-        databaseReference.child(name).setValue(user);
+        databaseReference.child(username).setValue(user);
         Toast.makeText(BookingAppointment.this, "Booking Success", Toast.LENGTH_SHORT).show();
 
         startActivity(new Intent(BookingAppointment.this, Home.class));

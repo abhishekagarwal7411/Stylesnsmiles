@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.abhishek.stylesnsmiles">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/icon"
@@ -33,7 +37,10 @@
         <activity android:name=".Activity.BookingAppointment" />
         <activity android:name=".Activity.BookingDetailsList" />
         <activity android:name=".Activity.ChatScreen" />
-        <activity android:name=".Activity.About"></activity>
+        <activity android:name=".Activity.About" />
+        <activity android:name=".Activity.BookingDetailsListparticular"/>
+        <activity android:name=".Activity.LoginBeautician"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
     </application>
 
 </manifest>

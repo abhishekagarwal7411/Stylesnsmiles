@@ -15,7 +15,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:gravity="center_horizontal"
-        android:text="aaaaaaaaa"/>
+        android:text="Check internet connection"/>
     <TextView
         android:id="@+id/visibilitytext"
         android:layout_width="match_parent"

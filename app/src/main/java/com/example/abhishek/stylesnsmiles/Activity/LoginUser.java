@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.abhishek.stylesnsmiles.ClientConstant;
+import com.example.abhishek.stylesnsmiles.PojoClass.Connectivity;
 import com.example.abhishek.stylesnsmiles.PojoClass.RegistrationPojo;
 import com.example.abhishek.stylesnsmiles.R;
 import com.google.firebase.database.ChildEventListener;
@@ -97,17 +98,20 @@ if(isfromParlour){
             @Override
             public void onClick(View v) {
 
+                if (Connectivity.isNetworkAvailable(LoginUser.this)) {
+                    userName = editName.getText().toString();
+                    password = etPassword.getText().toString();
 
-                userName = editName.getText().toString();
-                password = etPassword.getText().toString();
+                    if (userName.isEmpty()) {
+                        Toast.makeText(LoginUser.this, "Please enter Username", Toast.LENGTH_SHORT).show();
+                    } else if (password.isEmpty()) {
+                        Toast.makeText(LoginUser.this, "Please enter Password", Toast.LENGTH_SHORT).show();
 
-                if (userName.isEmpty()) {
-                    Toast.makeText(LoginUser.this, "Please enter Username", Toast.LENGTH_SHORT).show();
-                } else if (password.isEmpty()) {
-                    Toast.makeText(LoginUser.this, "Please enter Password", Toast.LENGTH_SHORT).show();
-
-                } else {
-                    readDB();
+                    } else {
+                        readDB();
+                    }
+                }else {
+                    Toast.makeText(LoginUser.this, " Please check your internet connection", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -152,12 +156,15 @@ editPreferences.apply();
 //
                 }
             } else {
+//                if(i== (registrationPojos.size()-1)){
+//                    Toast.makeText(LoginUser.this, "Please enter valid username or password", Toast.LENGTH_SHORT).show();
+//                }
 //                Toast.makeText(LoginUser.this, "Please enter valid username", Toast.LENGTH_SHORT).show();
             }
         }
 
 //        pd.dismiss();
-//        Toast.makeText(Login.this, "User Not found", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(LoginUser.this, "User Not found", Toast.LENGTH_SHORT).show();
     }
 
     public void readDB()

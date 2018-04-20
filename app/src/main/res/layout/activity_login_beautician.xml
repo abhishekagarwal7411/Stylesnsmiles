@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/loginuser"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:text="Beautician Login"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textSize="30sp"/>
+
+
+
+        <!--<TextView-->
+            <!--android:gravity="start"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Select organization : "-->
+            <!--android:textColor="@color/colorPrimary"-->
+            <!--android:textSize="25dp"/>-->
+            <Spinner
+            android:id="@+id/tv_org_name"
+                style=""
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+android:hint="Select Organization"
+
+            android:padding="15dp"
+            android:textSize="15sp"/>
+
+
+
+        <!--<TextView-->
+            <!--android:gravity="start"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Enter beautician name : "-->
+            <!--android:textColor="@color/colorPrimary"-->
+            <!--android:textSize="25dp"/>-->
+        <EditText
+            android:id="@+id/et_name_beauty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+android:paddingBottom="3dp"
+            android:gravity="start"
+            android:hint="Beautician name"
+            android:imeActionLabel="Next"
+            android:imeOptions="actionNext"
+
+            android:padding="10dp"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:visibility="visible"/>
+        <!--</LinearLayout>-->
+        <!--<TextView-->
+            <!--android:gravity="start"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Enter mobile number : "-->
+            <!--android:textColor="@color/colorPrimary"-->
+            <!--android:textSize="25dp"/>-->
+        <EditText
+            android:id="@+id/et_mobile_beauty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:paddingBottom="3dp"
+
+            android:gravity="start"
+            android:hint="Enter Mobile Number"
+            android:imeActionLabel="Next"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:visibility="visible"/>
+<android.support.v7.widget.CardView
+    android:layout_marginTop="10dp"
+    android:layout_width="wrap_content"
+    app:cardCornerRadius="20dp"
+    android:layout_height="50dp">
+
+        <Button
+            android:id="@+id/button_next_login_screen"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#FF4081"
+            android:text="Login"
+
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"/>
+</android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+</ScrollView>

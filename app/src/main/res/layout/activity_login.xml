@@ -1,54 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/parlour11"
+    android:background="@drawable/parlournewlogin"
     android:layout_height="match_parent"
-    tools:context=".Activity.Login">
-
-<TextView
-    android:padding="20dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Sign in\nwith all new Parlour application"
-    android:textColor="#000000"
-    android:textSize="20dp"
     android:gravity="center"
- />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:weightSum="2">
-
+    tools:context=".Activity.Login">
+    <android.support.v7.widget.CardView
+        android:id="@+id/card1"
+       android:layout_centerHorizontal="true"
+        app:cardCornerRadius="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <Button
         android:id="@+id/btnmanager"
-android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:background="#606060"
-        android:layout_gravity="bottom"
-
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:padding="5dp"
         android:textStyle="bold"
         android:text="Parlour Manager"
-        android:textSize="15sp" />
-    <Button
-    android:id="@+id/btn_user"
-android:layout_weight="1"
-    android:layout_width="0dp"
-    android:layout_height="50dp"
-        android:background="#00802b"
-    android:layout_gravity="bottom"
+        android:textSize="15sp"
+        /></android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_below="@+id/card1"
+        android:id="@+id/card2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        app:cardCornerRadius="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btnBeautician"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
 
-        android:textStyle="bold"
+            android:padding="5dp"
+            android:textStyle="bold"
 
-        android:text="Customer"
-    android:textSize="15sp" />
-</LinearLayout>
+            android:text="Beautician"
+            android:textSize="15sp"
+            /></android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_below="@+id/card2"
+        app:cardCornerRadius="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btn_user"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+
+            android:padding="5dp"
+            android:textStyle="bold"
+
+            android:text="Customer"
+            android:textSize="15sp"
+            /></android.support.v7.widget.CardView>
 
 
 
-</LinearLayout>
+
+
+</RelativeLayout>
