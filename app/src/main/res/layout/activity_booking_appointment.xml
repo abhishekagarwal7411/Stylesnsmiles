@@ -36,9 +36,34 @@
 android:layout_above="@+id/btnbook"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/packages_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/packages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+
+                android:text="Packages :"
+                android:textStyle="bold"
+                />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_packages"
+                android:layout_below="@+id/packages"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </android.support.v7.widget.RecyclerView>
+        </RelativeLayout>
         <TextView
             android:id="@+id/beautician_service"
             android:layout_width="match_parent"
@@ -46,10 +71,11 @@ android:layout_above="@+id/btnbook"
             android:textSize="20sp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-
+android:layout_below="@+id/packages_layout"
             android:text="Select Sevices:"
             android:textStyle="bold"
            />
+
 <LinearLayout
     android:orientation="vertical"
     android:id="@+id/service"

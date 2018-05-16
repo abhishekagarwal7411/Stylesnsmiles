@@ -7,8 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -38,7 +41,7 @@ public class ParlourRegister extends AppCompatActivity {
     String MobilePattern = "[0-9]{10}";
     String username, contactNumber, emailId;
     String status = "Book";
-
+    Spinner spinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,9 +58,31 @@ public class ParlourRegister extends AppCompatActivity {
         etemail = findViewById(R.id.etemail_parlour);
         etmob = findViewById(R.id.mobile_num_parlour);
         addbeauty = findViewById(R.id.btn_add_beautician);
+        spinner = findViewById(R.id.tv_org_beauty);
+
         viewbeauty = findViewById(R.id.btn_viewall);
         btn_Details=findViewById(R.id.btn_Details);
         clickListener();
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.special, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(
+                    AdapterView<?> adapterView, View view,
+                    int i, long l) {
+//
+//                interesting = spinner.getItemAtPosition(i).toString();
+//                Log.e("looo",interesting);
+            }
+
+            public void onNothingSelected(
+                    AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
     @Override

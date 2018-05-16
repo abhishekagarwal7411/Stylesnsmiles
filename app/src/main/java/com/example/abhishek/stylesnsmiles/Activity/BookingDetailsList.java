@@ -8,17 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.abhishek.stylesnsmiles.Adapter.AdapterrecycleParlourbeauticianlist;
 import com.example.abhishek.stylesnsmiles.Adapter.AdapterrecycleParlourbeauticianlistCustomerBooking;
 import com.example.abhishek.stylesnsmiles.PojoClass.BookingDetails;
 import com.example.abhishek.stylesnsmiles.PojoClass.Connectivity;
-import com.example.abhishek.stylesnsmiles.PojoClass.PojoParlourBeauticaian;
 import com.example.abhishek.stylesnsmiles.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;

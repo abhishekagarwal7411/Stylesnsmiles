@@ -24,5 +24,14 @@
     <item>Luminous Nails</item>
     <item>Draida</item>
 </string-array>
+    <string-array name="special">
+        <item>Select Speciality</item>
+        <item>Threading</item>
+        <item>Facial</item>
+        <item>Pedicure</item>
+        <item>Manicure</item>
+        <item>Massage</item>
+
+    </string-array>
 
 </resources>

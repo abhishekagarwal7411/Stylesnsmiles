@@ -13,6 +13,9 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatRadioButton;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,9 +36,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.abhishek.stylesnsmiles.Adapter.AdapterrecyclePackage;
+import com.example.abhishek.stylesnsmiles.Adapter.AdapterrecycleParlour;
 import com.example.abhishek.stylesnsmiles.ClientConstant;
+import com.example.abhishek.stylesnsmiles.PojoClass.Album;
 import com.example.abhishek.stylesnsmiles.PojoClass.BookingDetails;
 import com.example.abhishek.stylesnsmiles.PojoClass.Connectivity;
+import com.example.abhishek.stylesnsmiles.PojoClass.Packages;
 import com.example.abhishek.stylesnsmiles.PojoClass.RegistrationPojo;
 import com.example.abhishek.stylesnsmiles.R;
 import com.google.firebase.database.DatabaseReference;
@@ -66,12 +73,15 @@ public class BookingAppointment extends AppCompatActivity implements
     String name, parlourname;
     LinearLayout service;
     String customermobile;
+    private AdapterrecyclePackage adapter;
+    private List<Packages> albumList;
     Button btnDatePicker, btnTimePicker, btnbook;
     EditText txtDate, txtTime;
     SharedPreferences defaultPreferences;
     SharedPreferences.Editor editPreferences;
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
+    RecyclerView recyclerView;
     //    List<String> array = new ArrayList<>();
     CheckBox cb;
     String date, time;
@@ -105,13 +115,22 @@ public class BookingAppointment extends AppCompatActivity implements
         btnTimePicker = (Button) findViewById(R.id.btn_time);
         txtDate = (EditText) findViewById(R.id.in_date);
         txtTime = (EditText) findViewById(R.id.in_time);
-
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_packages);
         btnDatePicker.setOnClickListener(this);
         btnTimePicker.setOnClickListener(this);
         btnbook.setOnClickListener(this);
         beautician_name.setText(name + " from " + parlourname);
         service = findViewById(R.id.service);
 
+        albumList = new ArrayList<>();
+        adapter = new AdapterrecyclePackage(this, albumList);
+
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+
+        preparePackages();
         for (int i = 0; i < str.length; i++) {
             cb = new CheckBox(this);
             cb.setText(str[i]);
@@ -191,7 +210,20 @@ public class BookingAppointment extends AppCompatActivity implements
             sendBookingData();
         }
     }
+   public void preparePackages(){
+       Packages a = new Packages("MONTHLY MUST","FULL LEGS WAX","REGULAR FACIAL","UNDERARMS","THREADING","UPPER LIPS",1750);
+       albumList.add(a);
 
+       a = new Packages("HOLIDAY PAMPERING","REJUVENATING FACIAL","HOT OIL HEAD MASSAGE","AROMA PEDICURE","AROMA MANICURE"," CLEAN-UP",1900);
+       albumList.add(a);
+//
+       a = new Packages("SEASON SPECIAL","MOODY MONSOON","RELAXING HEAD MASSAGE","INSTA GLOW BODY POLISH","ANTI-TAN PEDICURE","ANTI-TAN PEDICURE",4000);
+       albumList.add(a);
+       a = new Packages("CORPORATE BUSY BEES","FACIAL","HAIR SPA","CRYSTAL SPA MANICURE","CRYSTAL SPA PEDICURE","THREADING",3500);
+       albumList.add(a);
+
+       adapter.notifyDataSetChanged();
+    }
     public void sendBookingData() {
         if (Connectivity.isNetworkAvailable(BookingAppointment.this)) {
             date = txtDate.getText().toString();
