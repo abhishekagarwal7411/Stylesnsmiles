@@ -38,9 +38,12 @@
         <activity android:name=".Activity.BookingDetailsList" />
         <activity android:name=".Activity.ChatScreen" />
         <activity android:name=".Activity.About" />
-        <activity android:name=".Activity.BookingDetailsListparticular"/>
-        <activity android:name=".Activity.LoginBeautician"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".Activity.BookingDetailsListparticular" />
+        <activity
+            android:name=".Activity.LoginBeautician"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".Activity.PackagesList" />
+        <activity android:name=".Activity.PackageDetails"></activity>
     </application>
 
 </manifest>

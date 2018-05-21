@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    >
+    <android.support.v7.widget.CardView
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/layout_head"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/pcktitlelist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Summer Collection"
+                    android:textSize="20sp"
+
+                    android:padding="5dp"
+                    android:textStyle="bold"/>
+                <ImageView
+                    android:id="@+id/update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:layout_gravity="end"
+                    android:src="@drawable/ic_edit"
+                    android:layout_toLeftOf="@+id/deletepck"/>
+                <ImageView
+                    android:id="@+id/deletepck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+android:layout_alignParentEnd="true"
+                    android:padding="5dp"
+                    android:layout_gravity="end"
+                    android:src="@drawable/ic_delete" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:padding="10dp"
+                android:layout_below="@+id/layout_head"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/itmfirst"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Threading"/>
+                <TextView
+                    android:id="@+id/itmsecond"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Facial"/>
+                <TextView
+                    android:id="@+id/itmthird"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="massage"/>
+                <TextView
+                    android:id="@+id/itmfourth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="massage"/>
+                <TextView
+                    android:id="@+id/itmprice"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="end"
+                    android:textStyle="bold"
+                    android:text=" Rs: 1260"/>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</ScrollView>

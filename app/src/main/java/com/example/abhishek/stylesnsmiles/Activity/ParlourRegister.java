@@ -37,7 +37,7 @@ public class ParlourRegister extends AppCompatActivity {
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
     EditText etname, etemail, etmob;
-    Button addbeauty, viewbeauty,btn_Details;
+    Button addbeauty, viewbeauty,btn_Details,btn_packages;
     String MobilePattern = "[0-9]{10}";
     String username, contactNumber, emailId;
     String status = "Book";
@@ -59,7 +59,7 @@ public class ParlourRegister extends AppCompatActivity {
         etmob = findViewById(R.id.mobile_num_parlour);
         addbeauty = findViewById(R.id.btn_add_beautician);
         spinner = findViewById(R.id.tv_org_beauty);
-
+       btn_packages=findViewById(R.id.btn_Details_package);
         viewbeauty = findViewById(R.id.btn_viewall);
         btn_Details=findViewById(R.id.btn_Details);
         clickListener();
@@ -98,6 +98,15 @@ public class ParlourRegister extends AppCompatActivity {
     }
 
     public void clickListener() {
+        btn_packages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(ParlourRegister.this, PackagesList.class);
+                intent.putExtra("parlourtitle", title);
+                startActivity(intent);
+            }
+        });
         btn_Details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
