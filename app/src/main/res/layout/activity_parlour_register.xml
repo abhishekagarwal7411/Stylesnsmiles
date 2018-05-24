@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/loginuser"
+    android:fillViewport="true"
+    android:isScrollContainer="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+
+        <LinearLayout
+            android:id="@+id/tv_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:paddingBottom="10dp"
+                    android:textStyle="bold"
+                    android:text="Add Beautician"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+
+
+                <EditText
+                    android:id="@+id/user_name_parlour"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+
+                    android:hint="Name"
+                    android:imeActionLabel="Next"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+
+                android:orientation="horizontal">
+
+
+
+
+
+
+
+                <EditText
+                    android:id="@+id/mobile_num_parlour"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+
+                    android:hint="Mobile number"
+                    android:imeActionLabel="Next"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+
+                android:orientation="horizontal">
+
+
+
+
+
+                <EditText
+                    android:id="@+id/etemail_parlour"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+
+                    android:hint="Email Id"
+                    android:imeActionLabel="Next"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white" />
+
+
+            </LinearLayout>
+
+            <Spinner
+                android:id="@+id/tv_org_beauty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="Select speciality"
+
+                android:padding="15dp"
+                android:textSize="15sp"/>
+
+
+            <Button
+                android:id="@+id/btn_add_beautician"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="17sp"
+                android:text="Add Beautician" />
+            <Button
+                android:id="@+id/btn_viewall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="17sp"
+                android:text="view Beautician" />
+            <Button
+                android:id="@+id/btn_Details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="17sp"
+                android:text="Booking Details" />
+            <Button
+                android:id="@+id/btn_Details_package"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="17sp"
+                android:text="Packages" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+
+
+
+
+

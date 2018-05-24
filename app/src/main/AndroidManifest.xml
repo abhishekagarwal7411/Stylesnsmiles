@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.abhishek.stylesnsmiles">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/icon"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/icon"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".Activity.Splashscreen"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activity.Home" />
+        <activity
+            android:name=".Activity.Login"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".Activity.LoginUser"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".Activity.Registeration" />
+        <activity android:name=".Activity.ParlourPage" />
+        <activity android:name=".Activity.ParlourRegister" />
+        <activity android:name=".Activity.ParlourDetails" />
+        <activity android:name=".Activity.ViewBeaticianList" />
+        <activity android:name=".Activity.BookingAppointment" />
+        <activity android:name=".Activity.BookingDetailsList" />
+        <activity android:name=".Activity.ChatScreen" />
+        <activity android:name=".Activity.About" />
+        <activity android:name=".Activity.BookingDetailsListparticular" />
+        <activity
+            android:name=".Activity.LoginBeautician"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".Activity.PackagesList" />
+        <activity android:name=".Activity.PackageDetails"></activity>
+    </application>
+
+</manifest>

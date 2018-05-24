@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Parlour</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_add_favourite">Add to Favourites</string>
+    <string name="action_play_next">Play Next</string>
+    <string name="backdrop_title">LOVE MUSIC</string>
+    <string name="backdrop_subtitle">This season top 20 albums</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="login">Login</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
+    <string name="register">Register Now?</string>
+    <string-array name="name">
+        <item>Select organisation</item>
+        <item>Arabella Hair and Beauty</item>
+        <item>Sparkliez Beauty and Nails</item>
+        <item>Rebecca Salon</item>
+        <item>Bettys Beauty Salon</item>
+        <item>Armonika</item>
+        <item>Toni and Guy</item>
+        <item>Aquayo</item>
+        <item>Skin Deep</item>
+        <item>Luminous Nails</item>
+        <item>Draida</item>
+    </string-array>
+    <string-array name="special">
+        <item>Select Speciality</item>
+        <item>Threading</item>
+        <item>Facial</item>
+        <item>Pedicure</item>
+        <item>Manicure</item>
+        <item>Massage</item>
+
+    </string-array>
+
+</resources>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/loginuser"
+    android:fillViewport="true"
+    android:isScrollContainer="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+
+        <LinearLayout
+            android:id="@+id/add_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/add_package" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:paddingBottom="10dp"
+                    android:textStyle="bold"
+                    android:text="Add Package"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+
+
+                <EditText
+                    android:id="@+id/package_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+
+                    android:hint="Package title"
+                    android:imeActionLabel="Next"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+
+                android:orientation="horizontal">
+
+
+
+
+
+
+
+                <EditText
+                    android:id="@+id/package_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+
+                    android:hint="Item 1"
+                    android:imeActionLabel="Next"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+
+                android:orientation="horizontal">
+
+
+
+
+
+
+
+                <EditText
+                    android:id="@+id/package_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+
+                    android:hint="Item 2"
+                    android:imeActionLabel="Next"
+                    android:imeOptions="actionNext"
+
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+
+                android:orientation="horizontal">
+
+
+
+
+
+
+
+                <EditText
+                    android:id="@+id/package_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+
+                    android:hint="Item 3"
+                    android:imeActionLabel="Next"
+                    android:imeOptions="actionNext"
+
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+
+                android:orientation="horizontal">
+
+
+
+
+
+
+
+                <EditText
+                    android:id="@+id/package_four"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+
+                    android:hint="Item 4"
+                    android:imeActionLabel="Next"
+                    android:imeOptions="actionNext"
+
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+
+                android:orientation="horizontal">
+
+
+
+
+
+
+
+                <EditText
+                    android:id="@+id/package_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+
+                    android:hint="Price"
+                    android:imeActionLabel="Next"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white" />
+
+
+            </LinearLayout>
+            <Button
+                android:id="@+id/btn_add_package"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="17sp"
+                android:text="add" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+
+
+
+
+
