@@ -31,6 +31,8 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".Activity.Registeration" />
         <activity android:name=".Activity.ParlourPage" />
+        <activity android:name=".Activity.GroupChat" />
+
         <activity android:name=".Activity.ParlourRegister" />
         <activity android:name=".Activity.ParlourDetails" />
         <activity android:name=".Activity.ViewBeaticianList" />

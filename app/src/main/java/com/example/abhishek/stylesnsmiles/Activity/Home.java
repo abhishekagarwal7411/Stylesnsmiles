@@ -33,7 +33,7 @@ import java.util.List;
 public class Home extends AppCompatActivity implements ClientConstant {
     public DrawerLayout mDrawerLayout;
     public ActionBarDrawerToggle mDrawerToggle;
-    String[] strings = {"Share", "About", "LogOut"};
+    String[] strings = {"Chat","Share", "About", "LogOut"};
     Toolbar toolbar;
     SharedPreferences defaultPreferences;
     SharedPreferences.Editor editPreferences;
@@ -41,11 +41,18 @@ public class Home extends AppCompatActivity implements ClientConstant {
     private AdapterrecycleParlourcustomer adapter;
     private List<Album> albumList;
     private ListView mDrawerList;
+    String cusName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle!=null) {
+            cusName = bundle.getString("cusName");
+        }
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Parlours");
 
@@ -76,6 +83,15 @@ public class Home extends AppCompatActivity implements ClientConstant {
                 if (strings[position].equals("Share")) {
                     Toast.makeText(Home.this,"Share feature comming soon ....."                   ,Toast.LENGTH_LONG).show();
                 }
+
+
+                if (strings[position].equals("Chat")) {
+                    Intent intent = new Intent(Home.this, GroupChat.class);
+                    intent.putExtra("cusName",cusName);
+                    startActivity(intent);
+                }
+
+
 
                 if (strings[position].equals("About")) {
                     Intent intent = new Intent(Home.this, About.class);

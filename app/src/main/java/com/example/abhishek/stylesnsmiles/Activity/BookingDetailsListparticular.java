@@ -42,10 +42,17 @@ public class BookingDetailsListparticular extends AppCompatActivity implements C
     SharedPreferences defaultPreferences;
     SharedPreferences.Editor editPreferences;
     String beautyname;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_beatician_list);
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle!=null) {
+            beautyname = bundle.getString("beName");
+        }
+
         if (Connectivity.isNetworkAvailable(BookingDetailsListparticular.this)) {
             tv = findViewById(R.id.txt_book_title);
             rv = findViewById(R.id.recycler_book_beautician);
@@ -158,7 +165,7 @@ public class BookingDetailsListparticular extends AppCompatActivity implements C
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
+        inflater.inflate(R.menu.beuty, menu);
         return true;
     }
     private void newGame(){
@@ -205,6 +212,14 @@ public class BookingDetailsListparticular extends AppCompatActivity implements C
             case R.id.action_signout:
 
                 newGame();
+
+                return true;
+
+            case R.id.chat:
+
+                Intent intent = new Intent(BookingDetailsListparticular.this, GroupChat.class);
+                intent.putExtra("cusName",beautyname);
+                startActivity(intent);
 
                 return true;
 //            case R.id.help:

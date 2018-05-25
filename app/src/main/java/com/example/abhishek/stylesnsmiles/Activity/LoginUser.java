@@ -145,6 +145,7 @@ if(isfromParlour){
                         Log.e("username",userName);
 editPreferences.apply();
                         inent = new Intent(getApplicationContext(), Home.class);
+                        inent.putExtra("cusName",userName);
 
                     }
                     startActivity(inent);

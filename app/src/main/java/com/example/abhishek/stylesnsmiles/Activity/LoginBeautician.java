@@ -160,6 +160,7 @@ String interesting;
 
                         editPreferences.apply();
                                 Intent inent = new Intent(getApplicationContext(), BookingDetailsListparticular.class);
+                                inent.putExtra("beName",beautyusername);
 
 
                     startActivity(inent);
