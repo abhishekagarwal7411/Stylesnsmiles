@@ -68,6 +68,9 @@ public class DrawerListAdapter extends BaseAdapter {
         if(navMenuContent[position].equals("LogOut")){
             imageView.setImageResource(R.drawable.ic_logout);
         }
+        if(navMenuContent[position].equals("Chat")){
+            imageView.setImageResource(R.drawable.ic_chat);
+        }
 
 //            android.util.Log.e("jhdejdwek","bfedk");
 //        drawerText.setOnClickListener(new View.OnClickListener() {

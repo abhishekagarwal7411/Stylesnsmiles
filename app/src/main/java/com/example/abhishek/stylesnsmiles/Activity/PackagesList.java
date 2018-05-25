@@ -53,6 +53,7 @@ RecyclerView rcypackage;
                 Intent intent = new Intent(PackagesList.this, PackageDetails.class);
                 intent.putExtra("parlourtitle", title);
                 startActivity(intent);
+//                notifyDataSetChanged();
             }
         });
         if (getSupportActionBar() != null) {
