@@ -3,6 +3,7 @@ package com.example.abhishek.stylesnsmiles.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.abhishek.stylesnsmiles.Activity.ParlourRegister;
 import com.example.abhishek.stylesnsmiles.PojoClass.Album;
 import com.example.abhishek.stylesnsmiles.PojoClass.Packages;
+import com.example.abhishek.stylesnsmiles.PojoClass.PackagesDetail;
 import com.example.abhishek.stylesnsmiles.R;
 
 import java.util.List;
@@ -26,16 +28,18 @@ public class AdapterrecyclePackage extends RecyclerView.Adapter<AdapterrecyclePa
 
     String name;
     private Context mContext;
-    private List<Packages> albumList;
+    private List<PackagesDetail> albumList;
 //    EditText input;
 //    String edittext;
-    public AdapterrecyclePackage(Context mContext, List<Packages> albumList) {
+    public AdapterrecyclePackage(Context mContext, List<PackagesDetail> albumList) {
         this.mContext = mContext;
         this.albumList = albumList;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Log.e("size",Integer.toString(albumList.size()));
+
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.packages_adapter, parent, false);
         return new MyViewHolder(itemView);
@@ -43,16 +47,16 @@ public class AdapterrecyclePackage extends RecyclerView.Adapter<AdapterrecyclePa
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        final Packages album = albumList.get(position);
-        holder.heading.setText(album.getHeading());
-        holder.txt1.setText( "1 "+album.getTxt1());
-        holder.txt2.setText("2 "+album.getTxt2());
-        holder.txt3.setText("3 "+album.getTxt3());
-        holder.txt4.setText("4 "+album.getTxt4());
-        holder.txt5.setText("5 "+album.getTxt5());
+
+        final PackagesDetail album = albumList.get(position);
+        holder.heading.setText(album.getPcktitle());
+        holder.txt1.setText( "1 "+album.getPckone());
+        holder.txt2.setText("2 "+album.getPcktwo());
+        holder.txt3.setText("3 "+album.getPckthree());
+        holder.txt4.setText("4 "+album.getPckfour());
 
 
-        holder.price.setText("Price: "+Integer.toString(album.getPrice()));
+        holder.price.setText("Price: " +album.getPckprice());
 //        holder.count.setText(album.getCity());
 //        name = albumList.get(position).getName();
         // loading album cover using Glide library
@@ -87,7 +91,6 @@ public class AdapterrecyclePackage extends RecyclerView.Adapter<AdapterrecyclePa
             txt3 = (TextView) view.findViewById(R.id.txtp3);
 
             txt4 = (TextView) view.findViewById(R.id.txtp4);
-            txt5 = (TextView) view.findViewById(R.id.txtp5);
             price = (TextView) view.findViewById(R.id.txtp6);
             btn=(Button)view.findViewById(R.id.bookingpackage);
 

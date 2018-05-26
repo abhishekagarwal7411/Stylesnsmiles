@@ -43,8 +43,13 @@ import com.example.abhishek.stylesnsmiles.PojoClass.Album;
 import com.example.abhishek.stylesnsmiles.PojoClass.BookingDetails;
 import com.example.abhishek.stylesnsmiles.PojoClass.Connectivity;
 import com.example.abhishek.stylesnsmiles.PojoClass.Packages;
+import com.example.abhishek.stylesnsmiles.PojoClass.PackagesDetail;
+import com.example.abhishek.stylesnsmiles.PojoClass.PojoParlourBeauticaian;
 import com.example.abhishek.stylesnsmiles.PojoClass.RegistrationPojo;
 import com.example.abhishek.stylesnsmiles.R;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
@@ -68,18 +73,21 @@ public class BookingAppointment extends AppCompatActivity implements
     int buttons = 5;
     ;
     RadioGroup rgp;
-    TextView beautician_name;
+    TextView beautician_name,noItemPck;
     String[] str = {"Facials", "Waxing", "Nail care", "Eye care", "Foot care", "Make up"};
     String name, parlourname;
     LinearLayout service;
     String customermobile;
     private AdapterrecyclePackage adapter;
-    private List<Packages> albumList;
+    PackagesDetail pack;
+    private List<PackagesDetail> albumList = new ArrayList<>();
+
     Button btnDatePicker, btnTimePicker, btnbook;
     EditText txtDate, txtTime;
     SharedPreferences defaultPreferences;
     SharedPreferences.Editor editPreferences;
     DatabaseReference databaseReference;
+    DatabaseReference databaseReferencepackage;
     FirebaseDatabase firebaseDatabase;
     RecyclerView recyclerView;
     //    List<String> array = new ArrayList<>();
@@ -106,6 +114,8 @@ public class BookingAppointment extends AppCompatActivity implements
         }
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference(parlourname + "Booking");
+
+        databaseReferencepackage = firebaseDatabase.getReference(parlourname+"package");
         AppCompatRadioButton[] rb = new AppCompatRadioButton[buttons];
         defaultPreferences = getSharedPreferences(DEFAULT_PREFERENCE, Context.MODE_PRIVATE);
         editPreferences = defaultPreferences.edit();
@@ -119,6 +129,7 @@ public class BookingAppointment extends AppCompatActivity implements
         txtDate = (EditText) findViewById(R.id.in_date);
         txtTime = (EditText) findViewById(R.id.in_time);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_packages);
+        noItemPck=(TextView)findViewById(R.id.nopck);
         btnDatePicker.setOnClickListener(this);
         btnTimePicker.setOnClickListener(this);
         btnbook.setOnClickListener(this);
@@ -133,7 +144,13 @@ public class BookingAppointment extends AppCompatActivity implements
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
+
+
+
+
         preparePackages();
+       
+
         for (int i = 0; i < str.length; i++) {
             cb = new CheckBox(this);
             cb.setText(str[i]);
@@ -214,18 +231,39 @@ public class BookingAppointment extends AppCompatActivity implements
         }
     }
    public void preparePackages(){
-       Packages a = new Packages("MONTHLY MUST","FULL LEGS WAX","REGULAR FACIAL","UNDERARMS","THREADING","UPPER LIPS",1750);
-       albumList.add(a);
 
-       a = new Packages("HOLIDAY PAMPERING","REJUVENATING FACIAL","HOT OIL HEAD MASSAGE","AROMA PEDICURE","AROMA MANICURE"," CLEAN-UP",1900);
-       albumList.add(a);
-//
-       a = new Packages("SEASON SPECIAL","MOODY MONSOON","RELAXING HEAD MASSAGE","INSTA GLOW BODY POLISH","ANTI-TAN PEDICURE","ANTI-TAN PEDICURE",4000);
-       albumList.add(a);
-       a = new Packages("CORPORATE BUSY BEES","FACIAL","HAIR SPA","CRYSTAL SPA MANICURE","CRYSTAL SPA PEDICURE","THREADING",3500);
-       albumList.add(a);
 
-       adapter.notifyDataSetChanged();
+
+       databaseReferencepackage.addChildEventListener(new ChildEventListener() {
+           @Override
+           public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+               pack = dataSnapshot.getValue(PackagesDetail.class);
+               albumList.add(pack);
+
+               adapter.notifyDataSetChanged();
+           }
+
+           @Override
+           public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+           }
+
+           @Override
+           public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+           }
+
+           @Override
+           public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+           }
+
+           @Override
+           public void onCancelled(DatabaseError databaseError) {
+
+           }
+       });
+
     }
     public void sendBookingData() {
         if (Connectivity.isNetworkAvailable(BookingAppointment.this)) {

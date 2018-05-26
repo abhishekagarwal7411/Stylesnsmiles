@@ -56,6 +56,16 @@ android:layout_above="@+id/btnbook"
                 android:text="Packages :"
                 android:textStyle="bold"
                 />
+            <TextView
+                android:id="@+id/nopck"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="#000000"
+                android:gravity="center"
+                android:layout_below="@+id/packages"
+                android:text="No package added yet"/>
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_packages"
                 android:layout_below="@+id/packages"
