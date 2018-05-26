@@ -10,11 +10,12 @@ public class BookingDetails {
     private String date;
     private String time;
     private  String customermobile;
+    private String status;
     public BookingDetails() {
 
     }
 
-    public BookingDetails(String username,String customermobile,String parlourname,String parlourEmployeename,String parlourEmployeeContactDetail,String date,String time) {
+    public BookingDetails(String username,String customermobile,String parlourname,String parlourEmployeename,String parlourEmployeeContactDetail,String date,String time,String status) {
         this.username = username;
         this.parlourname = parlourname;
         this.parlourEmployeename = parlourEmployeename;
@@ -22,7 +23,16 @@ public class BookingDetails {
         this.date = date;
         this.time = time;
         this.customermobile = customermobile;
+        this.status = status;
 
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getCustomermobile() {

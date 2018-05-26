@@ -86,6 +86,7 @@ public class BookingAppointment extends AppCompatActivity implements
     CheckBox cb;
     String date, time;
     String username, parlourmobile;
+    Integer positionbeautician;
     private int mYear, mMonth, mDay, mHour, mMinute;
 
     @Override
@@ -97,6 +98,8 @@ public class BookingAppointment extends AppCompatActivity implements
         name = b.getString("title");
         parlourmobile = b.getString("mobile");
         parlourname = b.getString("name");
+        positionbeautician = b.getInt("postion");
+        Log.e("position",positionbeautician.toString());
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(parlourname);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -271,8 +274,9 @@ public class BookingAppointment extends AppCompatActivity implements
 
     public void writeData() {
         Log.e("writeData", "writeData");
-        BookingDetails user = new BookingDetails(username,customermobile, parlourname, name, parlourmobile, date, time);
-        databaseReference.child(username).setValue(user);
+        BookingDetails user = new BookingDetails(username,customermobile, parlourname, name, parlourmobile, date, time,"1");
+        String key=username.concat(positionbeautician.toString());
+        databaseReference.child(key).setValue(user);
         Toast.makeText(BookingAppointment.this, "Booking Success", Toast.LENGTH_SHORT).show();
 
         startActivity(new Intent(BookingAppointment.this, Home.class));
