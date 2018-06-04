@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatRadioButton;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -75,13 +76,16 @@ public class BookingAppointment extends AppCompatActivity implements
     RadioGroup rgp;
     TextView beautician_name,noItemPck;
     String[] str = {"Facials", "Waxing", "Nail care", "Eye care", "Foot care", "Make up"};
+//    String[] items = {" Easy "," Medium "," Hard "," Very Hard "};
+
     String name, parlourname;
+    String titlelist;
     LinearLayout service;
     String customermobile;
     private AdapterrecyclePackage adapter;
     PackagesDetail pack;
     private List<PackagesDetail> albumList = new ArrayList<>();
-
+CardView facialcard,waxcard,haircard;
     Button btnDatePicker, btnTimePicker, btnbook;
     EditText txtDate, txtTime;
     SharedPreferences defaultPreferences;
@@ -96,7 +100,7 @@ public class BookingAppointment extends AppCompatActivity implements
     String username, parlourmobile;
     Integer positionbeautician;
     private int mYear, mMonth, mDay, mHour, mMinute;
-
+TextView item_facial;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +111,9 @@ public class BookingAppointment extends AppCompatActivity implements
         parlourmobile = b.getString("mobile");
         parlourname = b.getString("name");
         positionbeautician = b.getInt("postion");
+        facialcard=findViewById(R.id.cardfacial);
+        waxcard=findViewById(R.id.cardwax);
+        haircard=findViewById(R.id.cardhair);
         Log.e("position",positionbeautician.toString());
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(parlourname);
@@ -132,6 +139,7 @@ public class BookingAppointment extends AppCompatActivity implements
         noItemPck=(TextView)findViewById(R.id.nopck);
         btnDatePicker.setOnClickListener(this);
         btnTimePicker.setOnClickListener(this);
+        facialcard.setOnClickListener(this);
         btnbook.setOnClickListener(this);
         beautician_name.setText(name + " from " + parlourname);
         service = findViewById(R.id.service);
@@ -149,13 +157,9 @@ public class BookingAppointment extends AppCompatActivity implements
 
 
         preparePackages();
-       
 
-        for (int i = 0; i < str.length; i++) {
-            cb = new CheckBox(this);
-            cb.setText(str[i]);
-            cb.setId(i + 6);
-            service.addView(cb);
+
+
 //            if(cb.isChecked()){
 //                    array.add(cb.getText().toString());
 //        }
@@ -169,7 +173,7 @@ public class BookingAppointment extends AppCompatActivity implements
 //                array.add(cb.getText().toString());
 //                Log.e("array",strcheck[i]);
 //            }
-        }
+
 
     }
     @Override
@@ -229,7 +233,146 @@ public class BookingAppointment extends AppCompatActivity implements
         if (v == btnbook) {
             sendBookingData();
         }
+        if(v == facialcard){
+            alertfacial();
+        }
+        if(v == waxcard){
+            alertwax();
+        }
+        if(v == haircard){
+            alertHair();
+        }
     }
+   public void alertfacial(){
+
+
+       final CharSequence[] items  = {" Acne Reduction Facial "," Fruit Facial "," Galvanic Facials "," Collagen Facial "};
+// arraylist to keep the selected items
+
+       final ArrayList seletedItems=new ArrayList();
+
+       AlertDialog dialog = new AlertDialog.Builder(this)
+               .setTitle("Types of Facials")
+               .setMultiChoiceItems(items, null, new DialogInterface.OnMultiChoiceClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialog, int indexSelected, boolean isChecked) {
+                       if (isChecked) {
+                           String abc;
+                           // If the user checked the item, add it to the selected items
+                           seletedItems.add(indexSelected);
+
+//                          for(i=0;i<seletedItems.size();i++){
+//                            abc= ie
+//                          }
+//                           item_facial.setText();
+                       } else if (seletedItems.contains(indexSelected)) {
+                           // Else, if the item is already in the array, remove it
+                           seletedItems.remove(Integer.valueOf(indexSelected));
+                       }
+                   }
+               }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialog, int id) {
+Log.e("selectedindex",seletedItems.toString());
+                //  Your code when user clicked on OK
+                       //  You can write the code  to save the selected item here
+                   }
+               }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialog, int id) {
+                       //  Your code when user clicked on Cancel
+                   }
+               }).create();
+       dialog.show();
+
+   }
+    public void alertwax(){
+
+
+        final CharSequence[] items  = {" Soft Wax "," Fruit Wax "," Choclate Wax "," Sugar Wax "};
+// arraylist to keep the selected items
+
+        final ArrayList seletedItems=new ArrayList();
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Types of Waxing")
+                .setMultiChoiceItems(items, null, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int indexSelected, boolean isChecked) {
+                        if (isChecked) {
+                            String abc;
+                            // If the user checked the item, add it to the selected items
+                            seletedItems.add(indexSelected);
+
+//                          for(i=0;i<seletedItems.size();i++){
+//                            abc= ie
+//                          }
+//                           item_facial.setText();
+                        } else if (seletedItems.contains(indexSelected)) {
+                            // Else, if the item is already in the array, remove it
+                            seletedItems.remove(Integer.valueOf(indexSelected));
+                        }
+                    }
+                }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        Log.e("selectedindex",seletedItems.toString());
+                        //  Your code when user clicked on OK
+                        //  You can write the code  to save the selected item here
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        //  Your code when user clicked on Cancel
+                    }
+                }).create();
+        dialog.show();
+
+    }
+    public void alertHair(){
+
+
+        final CharSequence[] items  = {" Bob Cut ","Ponytail "," Ducktail "," Layered hair "};
+// arraylist to keep the selected items
+
+        final ArrayList seletedItems=new ArrayList();
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Types of Hair cut")
+                .setMultiChoiceItems(items, null, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int indexSelected, boolean isChecked) {
+                        if (isChecked) {
+                            String abc;
+                            // If the user checked the item, add it to the selected items
+                            seletedItems.add(indexSelected);
+
+//                          for(i=0;i<seletedItems.size();i++){
+//                            abc= ie
+//                          }
+//                           item_facial.setText();
+                        } else if (seletedItems.contains(indexSelected)) {
+                            // Else, if the item is already in the array, remove it
+                            seletedItems.remove(Integer.valueOf(indexSelected));
+                        }
+                    }
+                }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        Log.e("selectedindex",seletedItems.toString());
+                        //  Your code when user clicked on OK
+                        //  You can write the code  to save the selected item here
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        //  Your code when user clicked on Cancel
+                    }
+                }).create();
+        dialog.show();
+
+    }
+
    public void preparePackages(){
 
 
@@ -263,6 +406,7 @@ public class BookingAppointment extends AppCompatActivity implements
 
            }
        });
+
 
     }
     public void sendBookingData() {

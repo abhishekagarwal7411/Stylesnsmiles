@@ -1,27 +1,35 @@
 package com.example.abhishek.stylesnsmiles.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.abhishek.stylesnsmiles.PojoClass.PojoParlourBeauticaian;
 import com.example.abhishek.stylesnsmiles.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
 
 public class AdapterrecycleParlourbeauticianlist extends RecyclerView.Adapter<AdapterrecycleParlourbeauticianlist.MyViewHolder> {
-
+    DatabaseReference databaseReference;
+    FirebaseDatabase firebaseDatabase;
     List<PojoParlourBeauticaian> albumList;
     String name, url;
     private Context mContext;
-
-    public AdapterrecycleParlourbeauticianlist(Context mContext, List<PojoParlourBeauticaian> albumList) {
+String title;
+    public AdapterrecycleParlourbeauticianlist(Context mContext, List<PojoParlourBeauticaian> albumList ,String title) {
         this.mContext = mContext;
         this.albumList = albumList;
+        this.title= title;
     }
 
     @Override
@@ -33,6 +41,8 @@ public class AdapterrecycleParlourbeauticianlist extends RecyclerView.Adapter<Ad
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference(title);
         PojoParlourBeauticaian album = albumList.get(position);
         holder.title.setText(album.getUsername());
         holder.mobile.setText(album.getMobilenumber());
@@ -40,18 +50,38 @@ public class AdapterrecycleParlourbeauticianlist extends RecyclerView.Adapter<Ad
 //        name = albumList.get(position).getName();
         // loading album cover using Glide library
 //
-//        holder.llalbum.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                name = albumList.get(position).getName();
-//
-//                Intent centerLocationDetails = new Intent(mContext, ParlourDetails.class);
-//
-//                centerLocationDetails.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                centerLocationDetails.putExtra("parlournameCustomer",name);
-//                mContext.startActivity(centerLocationDetails);
-//            }
-//        });
+        holder.delbeauty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alert = new AlertDialog.Builder((Activity)mContext);
+
+                alert.setMessage("Do you want to delete?");
+                alert.setNegativeButton("CANCEL",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(
+                                    DialogInterface dialog,
+                                    int whichButton) {
+                                dialog.cancel();
+                            }
+                        });
+                alert.setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(
+                                    DialogInterface dialog,
+                                    int whichButton) {
+                                name = albumList.get(position).getUsername();
+                                databaseReference.child(name).setValue(null);
+//                        notifyDataSetChanged();
+                                albumList.remove(position);
+                                notifyDataSetChanged();
+
+                            }
+                        });
+                alert.create().show(); // btw show() create
+            }
+        });
     }
 
     /**
@@ -65,6 +95,7 @@ public class AdapterrecycleParlourbeauticianlist extends RecyclerView.Adapter<Ad
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, emailid, mobile;
+        ImageView delbeauty;
 
         //        public ImageView thumbnail, overflow;
 //LinearLayout llalbum;
@@ -73,7 +104,7 @@ public class AdapterrecycleParlourbeauticianlist extends RecyclerView.Adapter<Ad
             title = (TextView) view.findViewById(R.id.title);
             emailid = (TextView) view.findViewById(R.id.email);
             mobile = (TextView) view.findViewById(R.id.mob);
-
+delbeauty=view.findViewById(R.id.delete_beautician);
 //            overflow = (ImageView) view.findViewById(R.id.overflow);
         }
     }

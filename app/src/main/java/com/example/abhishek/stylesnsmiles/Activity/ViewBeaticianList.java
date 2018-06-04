@@ -76,7 +76,7 @@ public class ViewBeaticianList extends AppCompatActivity {
     }
 
     public void validate() {
-        adapter = new AdapterrecycleParlourbeauticianlist(this, pojoParlourBeauticaians);
+        adapter = new AdapterrecycleParlourbeauticianlist(this, pojoParlourBeauticaians,title);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         rv.setLayoutManager(mLayoutManager);
         rv.setItemAnimator(new DefaultItemAnimator());

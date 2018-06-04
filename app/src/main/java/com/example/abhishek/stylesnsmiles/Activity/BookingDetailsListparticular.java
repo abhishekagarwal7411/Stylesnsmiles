@@ -134,8 +134,12 @@ public class BookingDetailsListparticular extends AppCompatActivity implements C
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 pojoParlourBeauticaian = dataSnapshot.getValue(BookingDetails.class);
-                pojoParlourBeauticaians.add(pojoParlourBeauticaian);
+                try {
+                    if (pojoParlourBeauticaian.getParlourEmployeename().equalsIgnoreCase(beautyname)) {
+                        pojoParlourBeauticaians.add(pojoParlourBeauticaian);
+                    }
 
+                }catch (Exception e){}
                 validate();
 
             }

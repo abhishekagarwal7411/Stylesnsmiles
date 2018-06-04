@@ -25,9 +25,11 @@ public class AdapterrecycleParlourbeauticianlistCustomerBooking extends Recycler
     String mob, email, status, title;
     private Context mContext;
 
+
     public AdapterrecycleParlourbeauticianlistCustomerBooking(Context mContext, List<BookingDetails> albumList) {
         this.mContext = mContext;
         this.albumList = albumList;
+
     }
 
     @Override
