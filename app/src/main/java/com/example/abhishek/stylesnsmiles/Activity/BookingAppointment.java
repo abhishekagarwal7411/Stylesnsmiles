@@ -251,6 +251,7 @@ TextView item_facial;
                             txtTime.setText(hourOfDay + ":" + minute);
                         }
                     }, mHour, mMinute, false);
+
             timePickerDialog.show();
         }
         if (v == btnbook) {

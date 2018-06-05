@@ -72,7 +72,7 @@ String username;
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference(title);
         datbaseBook = firebaseDatabase.getReference(title+ "Booking");
-
+Log.e("title",title);
         readDB();
     }
 
@@ -111,7 +111,7 @@ String username;
 //                    nodatatext.setVisibility(View.VISIBLE);
 //
 //                }
-//                validate();
+
 
             }
 
@@ -173,6 +173,7 @@ String username;
 
             }
         });
+        validate();
     }
 }
 
