@@ -140,6 +140,8 @@ TextView item_facial;
         btnDatePicker.setOnClickListener(this);
         btnTimePicker.setOnClickListener(this);
         facialcard.setOnClickListener(this);
+        waxcard.setOnClickListener(this);
+        haircard.setOnClickListener(this);
         btnbook.setOnClickListener(this);
         beautician_name.setText(name + " from " + parlourname);
         service = findViewById(R.id.service);
@@ -190,26 +192,47 @@ TextView item_facial;
 
         if (v == btnDatePicker) {
 
-            // Get Current Date
-            final Calendar c = Calendar.getInstance();
-            mYear = c.get(Calendar.YEAR);
-            mMonth = c.get(Calendar.MONTH);
-            mDay = c.get(Calendar.DAY_OF_MONTH);
+//            // Get Current Date
+//            final Calendar c = Calendar.getInstance();
+//            mYear = c.get(Calendar.YEAR);
+//            mMonth = c.get(Calendar.MONTH);
+//            mDay = c.get(Calendar.DAY_OF_MONTH);
+//
+//            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+//                    new DatePickerDialog.OnDateSetListener() {
+//
+//                        @Override
+//                        public void onDateSet(DatePicker view, int year,
+//                                              int monthOfYear, int dayOfMonth) {
+//
+//                            txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+//
+//                        }
+//                    }, mYear, mMonth, mDay);
+//            datePickerDialog.show();
+            final Calendar currentDate = Calendar.getInstance();
+           final  Calendar dates = Calendar.getInstance();
 
-
-            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                    new DatePickerDialog.OnDateSetListener() {
-
+            DatePickerDialog.OnDateSetListener dateSetListener = new
+                    DatePickerDialog.OnDateSetListener() {
                         @Override
-                        public void onDateSet(DatePicker view, int year,
-                                              int monthOfYear, int dayOfMonth) {
-
+                        public void onDateSet(DatePicker datePicker, int year, int
+                                monthOfYear, int dayOfMonth) {
+                            dates.set(year, monthOfYear, dayOfMonth);
                             txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-
+                            //use this date as per your requirement
                         }
-                    }, mYear, mMonth, mDay);
+                    };
+            DatePickerDialog datePickerDialog = new
+                    DatePickerDialog(BookingAppointment.this, dateSetListener,
+                    currentDate.get(Calendar.YEAR),
+                    currentDate.get(Calendar.MONTH),
+                    currentDate.get(Calendar.DAY_OF_MONTH));
+            // Limiting access to past dates in the step below:
+            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
             datePickerDialog.show();
         }
+
         if (v == btnTimePicker) {
 
             // Get Current Time
