@@ -72,7 +72,11 @@ public class AdapterrecycleParlourbeauticianlistCustomer extends RecyclerView.Ad
 //        }
         for (int i = 0; i < bookingvalid.size(); i++) {
             if (album.getUsername().equalsIgnoreCase(bookingvalid.get(i).getParlourEmployeename())) {
-                holder.btnbook.setText("BOOKED");
+                if(bookingvalid.get(i).getStatus().equalsIgnoreCase("0")) {
+                    holder.btnbook.setText("Book again");
+                }else if(bookingvalid.get(i).getStatus().equalsIgnoreCase("1")){
+                    holder.btnbook.setText("BOOKED");
+                }
             }
         }
 

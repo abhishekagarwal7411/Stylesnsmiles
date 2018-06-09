@@ -116,7 +116,7 @@ public class BookingDetailsListparticular extends AppCompatActivity implements C
     }
 
     public void validate() {
-        adapter = new AdapterrecycleParlourbeauticianlistCustomerBooking(this, pojoParlourBeauticaians);
+        adapter = new AdapterrecycleParlourbeauticianlistCustomerBooking(this, pojoParlourBeauticaians,title,"beauty");
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         rv.setLayoutManager(mLayoutManager);
         rv.setItemAnimator(new DefaultItemAnimator());

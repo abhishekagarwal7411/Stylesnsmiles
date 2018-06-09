@@ -98,7 +98,7 @@ public class BookingDetailsList extends AppCompatActivity {
     }
 
     public void validate() {
-        adapter = new AdapterrecycleParlourbeauticianlistCustomerBooking(this, pojoParlourBeauticaians);
+        adapter = new AdapterrecycleParlourbeauticianlistCustomerBooking(this, pojoParlourBeauticaians,title,"parlour");
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         rv.setLayoutManager(mLayoutManager);
         rv.setItemAnimator(new DefaultItemAnimator());

@@ -463,6 +463,7 @@ Log.e("selectedindex",seletedItems.toString());
             if (databaseReference.getParent() != null) {
                 Log.e("database.getParent", "database.getParent");
 //                    writeData();
+
                 writeData();
             } else {
                 Log.e("database.getParent.else", "database.getParent.else");
@@ -481,7 +482,7 @@ Log.e("selectedindex",seletedItems.toString());
     public void writeData() {
         Log.e("writeData", "writeData");
         BookingDetails user = new BookingDetails(username,customermobile, parlourname, name, parlourmobile, date, time,"1");
-        String key=username.concat(positionbeautician.toString());
+        String key=username.concat(name);
         databaseReference.child(key).setValue(user);
         Toast.makeText(BookingAppointment.this, "Booking Success", Toast.LENGTH_SHORT).show();
 
