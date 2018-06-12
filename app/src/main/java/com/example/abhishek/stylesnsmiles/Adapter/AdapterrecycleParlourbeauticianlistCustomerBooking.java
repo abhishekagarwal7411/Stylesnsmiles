@@ -95,6 +95,7 @@ holder.orderStat.setOnClickListener(new View.OnClickListener() {
                 .child("status").setValue("0");
         holder.ordersuccess.setVisibility(View.GONE);
         holder.orderStat.setText("Cancelled");
+        holder.orderStat.setEnabled(false);
         notifyDataSetChanged();
 
 

@@ -23,6 +23,7 @@ import com.example.abhishek.stylesnsmiles.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Calendar;
 import java.util.List;
 
 import static com.example.abhishek.stylesnsmiles.ClientConstant.DEFAULT_PREFERENCE;
@@ -70,6 +71,10 @@ public class AdapterrecycleParlourbeauticianlistCustomer extends RecyclerView.Ad
         holder.emailid.setText(album.getEmailId());
 
 //        }
+//        Calendar currentDate=Calendar.getInstance();
+//              int year=  currentDate.get(Calendar.YEAR);
+//        int month =currentDate.get(Calendar.MONTH);
+//        int day= currentDate.get(Calendar.DAY_OF_MONTH);
         for (int i = 0; i < bookingvalid.size(); i++) {
             if (album.getUsername().equalsIgnoreCase(bookingvalid.get(i).getParlourEmployeename())) {
                 if(bookingvalid.get(i).getStatus().equalsIgnoreCase("0")) {
@@ -78,6 +83,11 @@ public class AdapterrecycleParlourbeauticianlistCustomer extends RecyclerView.Ad
                     holder.btnbook.setText("BOOKED");
                 }
             }
+//            if(bookingvalid.get(i).getDate().equalsIgnoreCase(day + "-" + (month + 1) + "-" + year));{
+//                String key=bookingvalid.get(i).getUsername().concat(bookingvalid.get(i).getParlourEmployeename());
+//                databaseReference.child(key).setValue(null);
+//                notifyDataSetChanged();
+//            }
         }
 
 //        if(!booking.getStatus().isEmpty() && booking.getStatus().equalsIgnoreCase("1")){
@@ -151,14 +161,16 @@ public class AdapterrecycleParlourbeauticianlistCustomer extends RecyclerView.Ad
 //                        holder.cancel.setVisibility(View.GONE);
 //                        holder.btnbook.setEnabled(true);
 //                        Log.e("gggg",username);
-                        String key=username.concat(Integer.toString(position));
+
+                        String emp=albumList.get(position).getUsername();
+                        String key=username.concat(emp);
 
                         databaseReference.child(key).setValue(null);
-                        bookingvalid.remove(position);
-                        notifyDataSetChanged();
+                        holder.btnbook.setEnabled(true);
                         holder.btnbook.setText("Book");
                         holder.cancel.setVisibility(View.GONE);
-                        holder.btnbook.setEnabled(true);
+                        
+
                     }
                 });
         alert.create().show();

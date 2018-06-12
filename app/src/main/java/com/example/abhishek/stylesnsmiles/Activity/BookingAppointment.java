@@ -1,9 +1,6 @@
 package com.example.abhishek.stylesnsmiles.Activity;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -25,56 +22,38 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.abhishek.stylesnsmiles.Adapter.AdapterrecyclePackage;
-import com.example.abhishek.stylesnsmiles.Adapter.AdapterrecycleParlour;
 import com.example.abhishek.stylesnsmiles.ClientConstant;
-import com.example.abhishek.stylesnsmiles.PojoClass.Album;
 import com.example.abhishek.stylesnsmiles.PojoClass.BookingDetails;
 import com.example.abhishek.stylesnsmiles.PojoClass.Connectivity;
-import com.example.abhishek.stylesnsmiles.PojoClass.Packages;
 import com.example.abhishek.stylesnsmiles.PojoClass.PackagesDetail;
-import com.example.abhishek.stylesnsmiles.PojoClass.PojoParlourBeauticaian;
-import com.example.abhishek.stylesnsmiles.PojoClass.RegistrationPojo;
 import com.example.abhishek.stylesnsmiles.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static com.example.abhishek.stylesnsmiles.ClientConstant.DEFAULT_PREFERENCE;
-import static com.example.abhishek.stylesnsmiles.ClientConstant.KEY_USERNAME;
-
 public class BookingAppointment extends AppCompatActivity implements
-        View.OnClickListener,ClientConstant {
+        View.OnClickListener, ClientConstant {
     int i;
+    int x=1;
     int buttons = 5;
     ;
     RadioGroup rgp;
-    TextView beautician_name,noItemPck;
+    TextView beautician_name, noItemPck;
+                    int count = 0;
+
     String[] str = {"Facials", "Waxing", "Nail care", "Eye care", "Foot care", "Make up"};
 //    String[] items = {" Easy "," Medium "," Hard "," Very Hard "};
 
@@ -82,10 +61,9 @@ public class BookingAppointment extends AppCompatActivity implements
     String titlelist;
     LinearLayout service;
     String customermobile;
-    private AdapterrecyclePackage adapter;
+    List<BookingDetails> pojoParlourBeauticaians = new ArrayList<>();
     PackagesDetail pack;
-    private List<PackagesDetail> albumList = new ArrayList<>();
-CardView facialcard,waxcard,haircard;
+    CardView facialcard, waxcard, haircard;
     Button btnDatePicker, btnTimePicker, btnbook;
     EditText txtDate, txtTime;
     SharedPreferences defaultPreferences;
@@ -98,9 +76,13 @@ CardView facialcard,waxcard,haircard;
     CheckBox cb;
     String date, time;
     String username, parlourmobile;
+    BookingDetails pojoParlourBeauticaian;
     Integer positionbeautician;
+    TextView item_facial;
+    private AdapterrecyclePackage adapter;
+    private List<PackagesDetail> albumList = new ArrayList<>();
     private int mYear, mMonth, mDay, mHour, mMinute;
-TextView item_facial;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,10 +93,10 @@ TextView item_facial;
         parlourmobile = b.getString("mobile");
         parlourname = b.getString("name");
         positionbeautician = b.getInt("postion");
-        facialcard=findViewById(R.id.cardfacial);
-        waxcard=findViewById(R.id.cardwax);
-        haircard=findViewById(R.id.cardhair);
-        Log.e("position",positionbeautician.toString());
+        facialcard = findViewById(R.id.cardfacial);
+        waxcard = findViewById(R.id.cardwax);
+        haircard = findViewById(R.id.cardhair);
+        Log.e("position", positionbeautician.toString());
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(parlourname);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -122,13 +104,13 @@ TextView item_facial;
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference(parlourname + "Booking");
 
-        databaseReferencepackage = firebaseDatabase.getReference(parlourname+"package");
+        databaseReferencepackage = firebaseDatabase.getReference(parlourname + "package");
         AppCompatRadioButton[] rb = new AppCompatRadioButton[buttons];
         defaultPreferences = getSharedPreferences(DEFAULT_PREFERENCE, Context.MODE_PRIVATE);
         editPreferences = defaultPreferences.edit();
         username = defaultPreferences.getString(KEY_USERNAME, KEY_USERNAME);
-        customermobile=defaultPreferences.getString(KEY_MOBILE_NUM, KEY_MOBILE_NUM);
-        Log.e("usernameBooking",defaultPreferences.getString(KEY_USERNAME, KEY_USERNAME));
+        customermobile = defaultPreferences.getString(KEY_MOBILE_NUM, KEY_MOBILE_NUM);
+        Log.e("usernameBooking", defaultPreferences.getString(KEY_USERNAME, KEY_USERNAME));
         beautician_name = findViewById(R.id.beautician_name);
         btnbook = findViewById(R.id.btnbook);
         btnDatePicker = (Button) findViewById(R.id.btn_date);
@@ -136,7 +118,7 @@ TextView item_facial;
         txtDate = (EditText) findViewById(R.id.in_date);
         txtTime = (EditText) findViewById(R.id.in_time);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_packages);
-        noItemPck=(TextView)findViewById(R.id.nopck);
+        noItemPck = (TextView) findViewById(R.id.nopck);
         btnDatePicker.setOnClickListener(this);
         btnTimePicker.setOnClickListener(this);
         facialcard.setOnClickListener(this);
@@ -155,11 +137,7 @@ TextView item_facial;
         recyclerView.setAdapter(adapter);
 
 
-
-
-
         preparePackages();
-
 
 
 //            if(cb.isChecked()){
@@ -178,6 +156,7 @@ TextView item_facial;
 
 
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -187,6 +166,7 @@ TextView item_facial;
 
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onClick(View v) {
 
@@ -211,7 +191,7 @@ TextView item_facial;
 //                    }, mYear, mMonth, mDay);
 //            datePickerDialog.show();
             final Calendar currentDate = Calendar.getInstance();
-           final  Calendar dates = Calendar.getInstance();
+            final Calendar dates = Calendar.getInstance();
 
             DatePickerDialog.OnDateSetListener dateSetListener = new
                     DatePickerDialog.OnDateSetListener() {
@@ -257,66 +237,68 @@ TextView item_facial;
         if (v == btnbook) {
             sendBookingData();
         }
-        if(v == facialcard){
+        if (v == facialcard) {
             alertfacial();
         }
-        if(v == waxcard){
+        if (v == waxcard) {
             alertwax();
         }
-        if(v == haircard){
+        if (v == haircard) {
             alertHair();
         }
     }
-   public void alertfacial(){
+
+    public void alertfacial() {
 
 
-       final CharSequence[] items  = {" Acne Reduction Facial "," Fruit Facial "," Galvanic Facials "," Collagen Facial "};
+        final CharSequence[] items = {" Acne Reduction Facial ", " Fruit Facial ", " Galvanic Facials ", " Collagen Facial "};
 // arraylist to keep the selected items
 
-       final ArrayList seletedItems=new ArrayList();
+        final ArrayList seletedItems = new ArrayList();
 
-       AlertDialog dialog = new AlertDialog.Builder(this)
-               .setTitle("Types of Facials")
-               .setMultiChoiceItems(items, null, new DialogInterface.OnMultiChoiceClickListener() {
-                   @Override
-                   public void onClick(DialogInterface dialog, int indexSelected, boolean isChecked) {
-                       if (isChecked) {
-                           String abc;
-                           // If the user checked the item, add it to the selected items
-                           seletedItems.add(indexSelected);
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Types of Facials")
+                .setMultiChoiceItems(items, null, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int indexSelected, boolean isChecked) {
+                        if (isChecked) {
+                            String abc;
+                            // If the user checked the item, add it to the selected items
+                            seletedItems.add(indexSelected);
 
 //                          for(i=0;i<seletedItems.size();i++){
 //                            abc= ie
 //                          }
 //                           item_facial.setText();
-                       } else if (seletedItems.contains(indexSelected)) {
-                           // Else, if the item is already in the array, remove it
-                           seletedItems.remove(Integer.valueOf(indexSelected));
-                       }
-                   }
-               }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                   @Override
-                   public void onClick(DialogInterface dialog, int id) {
-Log.e("selectedindex",seletedItems.toString());
-                //  Your code when user clicked on OK
-                       //  You can write the code  to save the selected item here
-                   }
-               }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                   @Override
-                   public void onClick(DialogInterface dialog, int id) {
-                       //  Your code when user clicked on Cancel
-                   }
-               }).create();
-       dialog.show();
+                        } else if (seletedItems.contains(indexSelected)) {
+                            // Else, if the item is already in the array, remove it
+                            seletedItems.remove(Integer.valueOf(indexSelected));
+                        }
+                    }
+                }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        Log.e("selectedindex", seletedItems.toString());
+                        //  Your code when user clicked on OK
+                        //  You can write the code  to save the selected item here
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        //  Your code when user clicked on Cancel
+                    }
+                }).create();
+        dialog.show();
 
-   }
-    public void alertwax(){
+    }
+
+    public void alertwax() {
 
 
-        final CharSequence[] items  = {" Soft Wax "," Fruit Wax "," Choclate Wax "," Sugar Wax "};
+        final CharSequence[] items = {" Soft Wax ", " Fruit Wax ", " Choclate Wax ", " Sugar Wax "};
 // arraylist to keep the selected items
 
-        final ArrayList seletedItems=new ArrayList();
+        final ArrayList seletedItems = new ArrayList();
 
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Types of Waxing")
@@ -340,7 +322,7 @@ Log.e("selectedindex",seletedItems.toString());
                 }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        Log.e("selectedindex",seletedItems.toString());
+                        Log.e("selectedindex", seletedItems.toString());
                         //  Your code when user clicked on OK
                         //  You can write the code  to save the selected item here
                     }
@@ -353,13 +335,14 @@ Log.e("selectedindex",seletedItems.toString());
         dialog.show();
 
     }
-    public void alertHair(){
+
+    public void alertHair() {
 
 
-        final CharSequence[] items  = {" Bob Cut ","Ponytail "," Ducktail "," Layered hair "};
+        final CharSequence[] items = {" Bob Cut ", "Ponytail ", " Ducktail ", " Layered hair "};
 // arraylist to keep the selected items
 
-        final ArrayList seletedItems=new ArrayList();
+        final ArrayList seletedItems = new ArrayList();
 
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Types of Hair cut")
@@ -383,7 +366,7 @@ Log.e("selectedindex",seletedItems.toString());
                 }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        Log.e("selectedindex",seletedItems.toString());
+                        Log.e("selectedindex", seletedItems.toString());
                         //  Your code when user clicked on OK
                         //  You can write the code  to save the selected item here
                     }
@@ -397,58 +380,58 @@ Log.e("selectedindex",seletedItems.toString());
 
     }
 
-   public void preparePackages(){
+    public void preparePackages() {
 
 
+        databaseReferencepackage.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                pack = dataSnapshot.getValue(PackagesDetail.class);
+                albumList.add(pack);
 
-       databaseReferencepackage.addChildEventListener(new ChildEventListener() {
-           @Override
-           public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-               pack = dataSnapshot.getValue(PackagesDetail.class);
-               albumList.add(pack);
+                adapter.notifyDataSetChanged();
+            }
 
-               adapter.notifyDataSetChanged();
-           }
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
-           @Override
-           public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            }
 
-           }
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
 
-           @Override
-           public void onChildRemoved(DataSnapshot dataSnapshot) {
+            }
 
-           }
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
-           @Override
-           public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            }
 
-           }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-           @Override
-           public void onCancelled(DatabaseError databaseError) {
-
-           }
-       });
+            }
+        });
 
 
     }
+
     public void sendBookingData() {
         if (Connectivity.isNetworkAvailable(BookingAppointment.this)) {
             date = txtDate.getText().toString();
             time = txtTime.getText().toString();
-            if(date.isEmpty()){
+            if (date.isEmpty()) {
                 Toast.makeText(BookingAppointment.this, "Please enter Booking Date", Toast.LENGTH_SHORT).show();
-            }else if(time.isEmpty()) {
+            } else if (time.isEmpty()) {
                 Toast.makeText(BookingAppointment.this, "Please enter Booking Time", Toast.LENGTH_SHORT).show();
-            }else {
+            } else {
 
                 checkDB();
             }
 
 //            Bundle bundle = new Bundle();
 
-        } else{
+        } else {
             Toast.makeText(BookingAppointment.this, "Please check your internet connection", Toast.LENGTH_SHORT).show();
         }
 
@@ -459,12 +442,13 @@ Log.e("selectedindex",seletedItems.toString());
     public void checkDB() {
 
         if (databaseReference != null) {
-            Log.e("database", "database");
+//            Log.e("database", databaseReference.getParent().getKey());
+
             if (databaseReference.getParent() != null) {
                 Log.e("database.getParent", "database.getParent");
 //                    writeData();
 
-                writeData();
+                readDB();
             } else {
                 Log.e("database.getParent.else", "database.getParent.else");
                 writeData();
@@ -478,19 +462,126 @@ Log.e("selectedindex",seletedItems.toString());
 
 //
     }
+//databaseReference.addv
+//        @Override
+//        public void onDataChange(DataSnapshot dataSnapshot) {
+//            Log.i(dataSnapshot.getChildrenCount()+"Count");
+//
+//        }
+//
+//        @Override
+//        public void onCancelled(DatabaseError databaseError) {
+//
+//        }
+//    });
+    public void readDB()
+
+    {
+
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                pojoParlourBeauticaian = dataSnapshot.getValue(BookingDetails.class);
+                pojoParlourBeauticaians.add(pojoParlourBeauticaian);
+//                  writeData();
+                  databaseReference.addValueEventListener(new ValueEventListener() {
+                      @Override
+                      public void onDataChange(DataSnapshot dataSnapshot) {
+                          Log.e("count", dataSnapshot.getChildrenCount() + "Count");
+                          for (int i = 0; i <= dataSnapshot.getChildrenCount(); i++) {
+                              Log.e("name", name);
+                              if (pojoParlourBeauticaians.size() == dataSnapshot.getChildrenCount()) {
+                                  try {
+                                      if (name.equalsIgnoreCase(pojoParlourBeauticaians.get(i).getParlourEmployeename())) {
+                                          if (date.equalsIgnoreCase(pojoParlourBeauticaians.get(i).getDate()) && time.equalsIgnoreCase(pojoParlourBeauticaians.get(i).getTime())) {
+                                              count = 1;
+                                              break;
+                                          }
+                                      } else {
+                                          count = 2;
+                                      }
+                                  } catch (Exception e) {
+                                  }
+
+                              }
+                          }
+
+                              if (count == 1 && x==1 ) {
+                                  Toast.makeText(BookingAppointment.this, "This time slot already taken please select different one", Toast.LENGTH_SHORT).show();
+//System.exit(0);
+                                  x=2;
+                                  startActivity(new Intent(BookingAppointment.this, Home.class));
+                                  finish();
+
+                              } else if(x!=2 ){
+                                  writeData();
+                                  x=3;
+
+
+                          }
+                      }
+
+
+
+
+                      @Override
+                      public void onCancelled(DatabaseError databaseError) {
+
+                      }
+                  });
+
+
+
+
+
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+//this.val();
+    }
+//    public void val(){
+//if(count == 2){
+//    writeData();
+//}else{
+//    Toast.makeText(BookingAppointment.this, "This time slot already taken please select different one", Toast.LENGTH_SHORT).show();
+//}
+//}
 
     public void writeData() {
         Log.e("writeData", "writeData");
-        BookingDetails user = new BookingDetails(username,customermobile, parlourname, name, parlourmobile, date, time,"1");
-        String key=username.concat(name);
+
+        BookingDetails user = new BookingDetails(username, customermobile, parlourname, name, parlourmobile, date, time, "1");
+        Log.e("pojoParlourBeauticaians",Integer.toString(pojoParlourBeauticaians.size()));
+        String key = username.concat(name);
         databaseReference.child(key).setValue(user);
-        Toast.makeText(BookingAppointment.this, "Booking Success", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(BookingAppointment.this, "Booking Success", Toast.LENGTH_SHORT).show();
 
         startActivity(new Intent(BookingAppointment.this, Home.class));
         finish();
     }
 
 }
+
 //        rgp =findViewById(R.id.radio_group);
 //        rgp.setOrientation(LinearLayout.VERTICAL);
 
