@@ -166,10 +166,10 @@ public class AdapterrecycleParlourbeauticianlistCustomer extends RecyclerView.Ad
                         String key=username.concat(emp);
 
                         databaseReference.child(key).setValue(null);
-                        holder.btnbook.setEnabled(true);
                         holder.btnbook.setText("Book");
                         holder.cancel.setVisibility(View.GONE);
-                        
+                        holder.btnbook.setEnabled(true);
+
 
                     }
                 });
