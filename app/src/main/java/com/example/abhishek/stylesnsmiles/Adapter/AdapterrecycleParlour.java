@@ -58,16 +58,48 @@ public class AdapterrecycleParlour extends RecyclerView.Adapter<AdapterrecyclePa
         holder.llalbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                name = albumList.get(position).getName();
+                LayoutInflater inflater =  LayoutInflater.from(mContext);
+                View alertLayout = inflater.inflate(R.layout.activity_aler, null);
+                final EditText etUsername = alertLayout.findViewById(R.id.editTextDialogUserInput);
+                AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+//                alert.setTitle("Password");
+                // this is set the view from XML inside AlertDialog
+                alert.setView(alertLayout);
+                // disallow cancel of AlertDialog on click of back button and outside touch
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String user = etUsername.getText().toString();
+                        Log.e("userdd",user);
+                     if(user.equalsIgnoreCase("password")){
+                         name = albumList.get(position).getName();
 
 
-                                    Intent centerLocationDetails = new Intent(mContext, ParlourRegister.class);
+                         Intent centerLocationDetails = new Intent(mContext, ParlourRegister.class);
 
-                                    centerLocationDetails.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    centerLocationDetails.putExtra("parlourname", name);
-                                    mContext.startActivity(centerLocationDetails);
+                         centerLocationDetails.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                         centerLocationDetails.putExtra("parlourname", name);
+                         mContext.startActivity(centerLocationDetails);
+                     }else{
+                         Toast.makeText(mContext, "Please enter correct password", Toast.LENGTH_SHORT).show();
 
+                     }
+                    }
+                });
+                AlertDialog dialog = alert.create();
+                dialog.show();
             }
+
+
+
         });
     }
 

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -137,6 +138,7 @@ public class BookingDetailsListparticular extends AppCompatActivity implements C
                 try {
                     if (pojoParlourBeauticaian.getParlourEmployeename().equalsIgnoreCase(beautyname)) {
                         pojoParlourBeauticaians.add(pojoParlourBeauticaian);
+                        Log.e("pparooja",Integer.toString(pojoParlourBeauticaians.size()));
                     }
 
                 }catch (Exception e){}

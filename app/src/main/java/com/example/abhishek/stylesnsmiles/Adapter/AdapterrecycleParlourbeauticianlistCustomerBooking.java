@@ -58,13 +58,18 @@ public class AdapterrecycleParlourbeauticianlistCustomerBooking extends Recycler
         holder.date.setText(album.getDate());
         holder.time_book.setText(album.getTime());
         if(!albumList.isEmpty()){
-            for(int i=0;i<albumList.size();i++){
 
-                if(albumList.get(i).getStatus().equalsIgnoreCase("0")){
+
+                if(album.getStatus().equalsIgnoreCase("0")){
                     holder.ordersuccess.setVisibility(View.GONE);
                     holder.orderStat.setText("Cancelled");
             holder.orderStat.setEnabled(false);
                 }
+                else{
+//                    holder.ordersuccess.setVisibility(View.VISIBLE);
+//                    holder.orderStat.setText("Cancel");
+//                    holder.orderStat.setEnabled(true);
+
             }
         }
         if(page.equalsIgnoreCase("parlour")){
