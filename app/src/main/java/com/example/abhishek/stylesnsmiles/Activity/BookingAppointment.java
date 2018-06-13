@@ -484,59 +484,51 @@ public class BookingAppointment extends AppCompatActivity implements
                 pojoParlourBeauticaian = dataSnapshot.getValue(BookingDetails.class);
                 pojoParlourBeauticaians.add(pojoParlourBeauticaian);
 //                  writeData();
-                  databaseReference.addValueEventListener(new ValueEventListener() {
-                      @Override
-                      public void onDataChange(DataSnapshot dataSnapshot) {
-                          Log.e("count", dataSnapshot.getChildrenCount() + "Count");
-                          for (int i = 0; i <= dataSnapshot.getChildrenCount(); i++) {
-                              Log.e("name", name);
-                              if (pojoParlourBeauticaians.size() == dataSnapshot.getChildrenCount()) {
-                                  try {
-                                      if (name.equalsIgnoreCase(pojoParlourBeauticaians.get(i).getParlourEmployeename())) {
-                                          if (date.equalsIgnoreCase(pojoParlourBeauticaians.get(i).getDate()) && time.equalsIgnoreCase(pojoParlourBeauticaians.get(i).getTime())) {
-                                              count = 1;
-                                              break;
-                                          }
-                                      } else {
-                                          count = 2;
-                                      }
-                                  } catch (Exception e) {
-                                  }
-
-                              }
-                          }
-
-                              if (count == 1 && x==1 ) {
-                                  Toast.makeText(BookingAppointment.this, "This time slot already taken please select different one", Toast.LENGTH_SHORT).show();
-//System.exit(0);
-                                  x=2;
-                                  startActivity(new Intent(BookingAppointment.this, Home.class));
-                                  finish();
-
-                              } else if(x!=2 ){
-                                  writeData();
-                                  x=3;
-
-
-                          }
-                      }
-
-
-
-
-                      @Override
-                      public void onCancelled(DatabaseError databaseError) {
-
-                      }
-                  });
-
-
-
-
-
-
+//                Log.e("countss", dataSnapshot.getChildrenCount() + "Count");
+//
+//                          Log.e("count", pojoParlourBeauticaians.size() + "Count");
+//                          for (int i = 0; i <= dataSnapshot.getChildrenCount(); i++) {
+//                              Log.e("name", name);
+//                              if (pojoParlourBeauticaians.size() == dataSnapshot.getChildrenCount()) {
+//                                  try {
+//                                      if (name.equalsIgnoreCase(pojoParlourBeauticaians.get(i).getParlourEmployeename())) {
+//                                          if (date.equalsIgnoreCase(pojoParlourBeauticaians.get(i).getDate()) && time.equalsIgnoreCase(pojoParlourBeauticaians.get(i).getTime())) {
+//                                              count = 1;
+//                                              break;
+//                                          }
+//                                      } else {
+//                                          count = 2;
+//                                      }
+//                                  } catch (Exception e) {
+//                                  }
+//
+//                              }
+//                          }
+//
+//                              if (count == 1 && x==1 ) {
+//                                  Toast.makeText(BookingAppointment.this, "This time slot already taken please select different one", Toast.LENGTH_SHORT).show();
+////System.exit(0);
+//                                  x=2;
+//                                  startActivity(new Intent(BookingAppointment.this, Home.class));
+//                                  finish();
+//
+//                              } else if(x!=2 ){
+//                                  writeData();
+//                                  x=3;
+//
+//
+//                          }
             }
 
+            //
+//
+//
+//
+//
+//
+//
+//
+//
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
@@ -557,8 +549,31 @@ public class BookingAppointment extends AppCompatActivity implements
 
             }
         });
-//this.val();
+        Log.e("data",Integer.toString(pojoParlourBeauticaians.size()));
+        for (int i = 0; i <= pojoParlourBeauticaians.size(); i++) {
+            try {
+
+
+                    if (name.equalsIgnoreCase(pojoParlourBeauticaians.get(i).getParlourEmployeename()) &&
+                            date.equalsIgnoreCase(pojoParlourBeauticaians.get(i).getDate()) && time.equalsIgnoreCase(pojoParlourBeauticaians.get(i).getTime())) {
+                        Toast.makeText(BookingAppointment.this, "This time slot already taken please select different one", Toast.LENGTH_SHORT).show();
+                        count = 2;
+                        break;
+                    }
+
+
+            } catch (Exception e) {
+            }
+
+        }
+        if (pojoParlourBeauticaians.size()!= 0) {
+            if (count != 2) {
+                writeData();
+            }
+
+        }
     }
+
 //    public void val(){
 //if(count == 2){
 //    writeData();
@@ -574,7 +589,7 @@ public class BookingAppointment extends AppCompatActivity implements
         Log.e("pojoParlourBeauticaians",Integer.toString(pojoParlourBeauticaians.size()));
         String key = username.concat(name);
         databaseReference.child(key).setValue(user);
-//        Toast.makeText(BookingAppointment.this, "Booking Success", Toast.LENGTH_SHORT).show();
+        Toast.makeText(BookingAppointment.this, "Booking Success", Toast.LENGTH_SHORT).show();
 
         startActivity(new Intent(BookingAppointment.this, Home.class));
         finish();
