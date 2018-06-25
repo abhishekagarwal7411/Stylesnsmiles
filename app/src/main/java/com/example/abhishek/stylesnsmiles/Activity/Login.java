@@ -32,7 +32,7 @@ public class Login extends AppCompatActivity {
         btnmangaer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Login.this, LoginUser.class);
+                Intent intent = new Intent(Login.this, ParlourPage.class);
                 intent.putExtra("isparlourpage", "isfromParlour");
                 startActivity(intent);
 

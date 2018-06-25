@@ -550,6 +550,9 @@ public class BookingAppointment extends AppCompatActivity implements
             }
         });
         Log.e("data",Integer.toString(pojoParlourBeauticaians.size()));
+//        Log.e("looog",pojoParlourBeauticaian.toString());
+        Log.e("kklk","kkkk");
+
         for (int i = 0; i <= pojoParlourBeauticaians.size(); i++) {
             try {
 
